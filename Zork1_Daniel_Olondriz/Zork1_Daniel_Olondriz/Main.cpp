@@ -1,6 +1,8 @@
 #include<cmath>
-#include "Functions.h"
+
+#include "World.h"
 #include<stdio.h>
 int main(){
-	
+	World world;
+	world.createWorld();
 }
