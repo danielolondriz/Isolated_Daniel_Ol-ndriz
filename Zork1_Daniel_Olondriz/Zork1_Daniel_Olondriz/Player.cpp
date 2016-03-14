@@ -7,7 +7,7 @@ enum directions {north,south,west,east};
 void Player::Movement()
 {
 	char answer[20];
-	
+	//World world;
 
 	char *Counter;
 	char *first;
@@ -20,7 +20,7 @@ void Player::Movement()
 	printf("What do you want to do?\n");
 	gets_s(answer);
 
-	//printf("You are in the %s\n", world->room->name);
+//	printf("You are in the %s\n", world.room->name);
 	//with strtok it takes the first and the second word
 	first = strtok_s(answer, " ",&Counter);
 	second = strtok_s(NULL, " ", &Counter);
