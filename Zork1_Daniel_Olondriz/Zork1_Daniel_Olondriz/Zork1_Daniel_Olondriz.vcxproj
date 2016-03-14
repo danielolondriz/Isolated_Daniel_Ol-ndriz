@@ -65,13 +65,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Exits.cpp" />
+    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exits.h" />
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

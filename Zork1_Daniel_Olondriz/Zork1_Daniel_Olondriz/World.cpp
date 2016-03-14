@@ -9,13 +9,15 @@ enum rooms {EntrancePlaza,MainStreet,HauntedHouse,Shop,EndofStreet,FerrisWheel,U
 
 	 room = new Room[12];
 	 exit = new Exit[12];
+	 player = new Player;
 }
 World::~World()
 {
 	delete[] room;
 	delete[] exit;
+	delete[] player;
 }
-void World::createWorld()
+void const World::createWorld()
 {
 	//Creates Rooms and Exits
 	int i;
