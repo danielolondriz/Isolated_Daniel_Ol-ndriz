@@ -1,5 +1,5 @@
 #include "Room.h"
-#include "Exits.h"
+#include "Exit.h"
 #include "Player.h"
 class World
 {
@@ -11,8 +11,9 @@ public:
 	World();
 	~World();
 	void const createWorld();
-	
-	
+	void movement();
 
-	
+
+
+
 };
