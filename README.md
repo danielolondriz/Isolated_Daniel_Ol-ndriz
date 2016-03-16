@@ -1,4 +1,6 @@
 # Zork1_Daniel_Olondriz
+NOTE: "Restructuration of code" and "Big changes: All iterations added" commits were made a day before, so they should be between "almost all instructions done" and "updated readme" commits in the timeline.
+
 -Welcome is The Hunt!
  -Get through an abandoned theme park to find a hidden murderer and solve a misterious case!
  
