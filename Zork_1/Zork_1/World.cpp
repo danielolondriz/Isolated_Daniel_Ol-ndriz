@@ -196,7 +196,7 @@ void const World::movement()
 	//Introduction
 
 	printf("You are now in the %s\n", ((room + j)->name));
-	system("color 05");
+	system("color 0d");
 	//Asks for the action
 	
 	do
