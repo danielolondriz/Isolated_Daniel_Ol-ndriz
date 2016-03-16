@@ -89,7 +89,7 @@ void const World::createWorld()
 	(exit + i)->origin = room + 1;
 	(exit + i)->destination = room + 3;
 	(exit + i)->direction = east;
-	(exit + i)->close = false;
+	(exit + i)->close = true;
 	i = 6; //Shop west
 	(exit + i)->origin = room + 3;
 	(exit + i)->destination = room + 1;
@@ -160,10 +160,10 @@ void const World::createWorld()
 	(exit + i)->destination = room + 7;
 	(exit + i)->direction = east;
 	(exit + i)->close = false;
-	i = 20; //STrain West
+	i = 20; //STrain east
 	(exit + i)->origin = room + 10;
 	(exit + i)->destination = room + 0;
-	(exit + i)->direction = west;
+	(exit + i)->direction = east;
 	(exit + i)->close = false;
 	i = 21; //Dock South
 	(exit + i)->origin = room +9;
@@ -171,6 +171,8 @@ void const World::createWorld()
 	(exit + i)->direction =south;
 	(exit + i)->close = false;
 
+	//CREATE PLAYER
+	(player)->location = room + 0;
 
 
 
@@ -199,6 +201,8 @@ void World::movement()
 	char *s = "s";
 	char *e = "e";
 	char *w = "w";
+	char *open = "open";
+	
 	//Introduction
 
 	printf("You are now in the %s\n", ((room + j)->name));
@@ -224,11 +228,12 @@ void World::movement()
 			{
 				for (i = 0; i < 22; i++)
 				{
-					if (((exit + i)->direction == north) && (exit + i)->origin == (room + i))
+					if (((exit + i)->direction == north) && (exit + i)->origin == player->location)
 					{
 						//changes Room to destination
-						(*(room + i) = (*(exit + i)->destination));
-						printf("You are now in the %s %i\n", ((room + i)->name), i);
+						(player->location) = (exit + i)->destination;
+						printf("You are now in the %s\n", (player->location));
+						break;
 					}
 				}
 			}
@@ -236,15 +241,226 @@ void World::movement()
 			{
 				for (i = 0; i < 22; i++)
 				{
-					if (((exit + i)->direction == west) && (exit + i)->origin == (room + j))
+					if (((exit + i)->direction == west) && (exit + i)->origin == player->location)
 					{
 						//changes Room to destination
-						(*(room + j) = (*(exit + i)->destination));
-						printf("You are now in the %s %i\n", ((room + j)->name), &j);
+						
+						(player->location) = (exit + i)->destination;
+						printf("You are now in the %s\n", (player->location));
+						break;
+					}
+				}
+
+			}
+			if (*first == *East || *first == *e)
+			{
+				for (i = 0; i < 22; i++)
+				{
+					if (((exit + i)->direction == east) && (exit + i)->origin == player->location)
+					{
+						if ((exit + i)->close = true)
+						{
+
+							//changes Room to destination
+
+							(player->location) = (exit + i)->destination;
+							printf("You are now in the %s\n", (player->location));
+							break;
+						}
+						else
+						{
+							printf("Door is closed\n");
+						}
+					}
+				}
+
+			}
+			if (*first == *South || *first == *s)
+			{
+				for (i = 0; i < 22; i++)
+				{
+					if (((exit + i)->direction == south) && (exit + i)->origin == player->location)
+					{
+						//changes Room to destination
+
+						(player->location) = (exit + i)->destination;
+						printf("You are now in the %s\n", (player->location));
+						break;
+					}
+				}
+
+			}
+			if (*first == *open)
+			{
+				for (i = 0; i < 22; i++)
+				{
+					if ((exit + i)->close==true && (exit + i)->origin == player->location)
+					{
+						((exit + i))->close = false;
+						printf("The Door has opened\n");
+						break;
+					}
+				}
+
+			}
+			if (*first == *go)
+			{
+				
+					
+						
+						printf("Where?\n" );
+						
+					
+				
+
+			}
+			if (*first == *look)
+			{
+
+				for (i = 0; i < 22; i++)
+				{
+					if ((exit + i)->origin == player->location)
+					{
+						
+
+						
+						printf(" %s\n", ((exit + i)->origin->description));
+						break;
 					}
 				}
 			}
+			if (*first == *help)
+			{
+
+
+						printf("Welcome to the Hunt.\n Its hunt or be hunted.\n Here are some tips for you to survive in this game:\n use n/s/w/e or north / south /east /west to move\n you can open the door of the shop\n Good luck\n");
+						
+					
+				}
 		}
-	} while (first != NULL);
+		else //TWO WORDS
+		{
+			//GO
+			if (*first == *go)
+			{
+				if (*second == *North || *second == *n)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == north) && (exit + i)->origin == player->location)
+						{
+							//changes Room to destination
+							(player->location) = (exit + i)->destination;
+							printf("You are now in the %s\n", (player->location));
+							break;
+						}
+					}
+				}
+				if (*second == *West || *second == *w)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == west) && (exit + i)->origin == player->location)
+						{
+							//changes Room to destination
+
+							(player->location) = (exit + i)->destination;
+							printf("You are now in the %s\n", (player->location));
+							break;
+						}
+					}
+
+				}
+				if (*second == *East || *second == *e)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == east) && (exit + i)->origin == player->location)
+						{
+							//changes Room to destination
+
+							(player->location) = (exit + i)->destination;
+							printf("You are now in the %s\n", (player->location));
+							break;
+						}
+					}
+
+				}
+				if (*second == *South || *second == *s)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == south) && (exit + i)->origin == player->location)
+						{
+							//changes Room to destination
+
+							(player->location) = (exit + i)->destination;
+							printf("You are now in the %s\n", (player->location));
+							break;
+						}
+					}
+
+				}
+			}
+			//LOOK
+			if (*first == *look)
+			{
+				if (*second == *North || *second == *n)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == north) && (exit + i)->origin == player->location)
+						{
+							
+							printf(" %s\n", ((exit + i)->destination));
+							break;
+						}
+					}
+				}
+				if (*second == *West || *second == *w)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == west) && (exit + i)->origin == player->location)
+						{
+							//changes Room to destination
+
+							printf(" %s\n", ((exit + i)->destination));
+							break;
+						}
+					}
+
+				}
+				if (*second == *East || *second == *e)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == east) && (exit + i)->origin == player->location)
+						{
+							//changes Room to destination
+
+							printf(" %s\n", ((exit + i)->destination));
+							break;
+						}
+					}
+
+				}
+				if (*second == *South || *second == *s)
+				{
+					for (i = 0; i < 22; i++)
+					{
+						if (((exit + i)->direction == south) && (exit + i)->origin == player->location)
+						{
+							//changes Room to destination
+
+							printf(" %s\n", ((exit + i)->destination));
+							break;
+						}
+					}
+
+				}
+			}
+		}
+	} while (*first != *quit);
 	
 }
