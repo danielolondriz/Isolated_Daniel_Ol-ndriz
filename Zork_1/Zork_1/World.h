@@ -11,7 +11,9 @@ public:
 	World();
 	~World();
 	void const createWorld();
-	void movement();
+	
+		void const movement();
+	
 
 
 

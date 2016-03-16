@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<cmath>
 #include <string.h>
+#include<stdlib.h>
 
 
 World::World()
@@ -179,7 +180,7 @@ void const World::createWorld()
 
 
 }
-void World::movement()
+void const World::movement()
 {
 	char answer[20];
 	int i = 0;
@@ -188,26 +189,16 @@ void World::movement()
 	char *first;
 	char *second;
 	//actions
-	const char *look = "look";
-	const char *go = "go";
-	const char *help = "help";
-	const char *quit = "quit";
+	
 	//directions
-	const char *North  = "north";
-	const char *South = "south";
-	const char *East = "east";
-	const char *West = "west";
-	const char *n = "n";
-	const char *s = "s";
-	const char *e = "e";
-	const char *w = "w";
-	const char *open = "open";
-	const char *close = "close";
+	
 	
 	//Introduction
 
 	printf("You are now in the %s\n", ((room + j)->name));
+	system("color 05");
 	//Asks for the action
+	
 	do
 	{
 
@@ -215,6 +206,7 @@ void World::movement()
 		{
 			printf("What do you want to do?\n");
 			gets_s(answer);
+			
 			//saves the 2 words
 			first = strtok_s(answer, " ", &Counter);
 		} while (first == NULL);
@@ -225,10 +217,10 @@ void World::movement()
 		{
 
 			//ONE WORD
-			if (strcmp(North, first) == 0 || strcmp(n, first)==0)
+			if (strcmp("north", first) == 0 || strcmp("n", first)==0)
 			{
 				
-				for (i = 0; i <= 22; i++)
+				for (i = 0; i <= 21; i++)
 				{
 					if (((exit + i)->direction == north) && (exit + i)->origin == player->location)
 					{
@@ -240,6 +232,7 @@ void World::movement()
 
 							(player->location) = (exit + i)->destination;
 							printf("You are now in the %s\n", (player->location));
+							printf("%s\n", (player->location->description));
 							break;
 						}
 
@@ -248,15 +241,16 @@ void World::movement()
 							printf("Door is closed\n");
 						}
 					}
-					if (i == 22 && (exit + i)->origin != player->location)
+					if (i == 21 && (exit + i)->destination != player->location)
 					{
 						printf("You cant go there!\n");
 					}
 				}
 			}
-			if (strcmp(West, first) == 0 || strcmp(w, first) == 0)
+			
+			else if (strcmp("west", first) == 0 || strcmp("w", first) == 0)
 			{
-				for (i = 0; i <= 22; i++)
+				for (i = 0; i <= 21; i++)
 				{
 					if (((exit + i)->direction == west) && (exit + i)->origin == player->location)
 					{
@@ -267,6 +261,7 @@ void World::movement()
 
 							(player->location) = (exit + i)->destination;
 							printf("You are now in the %s\n", (player->location));
+							printf("%s\n", (player->location->description));
 							break;
 						}
 
@@ -275,16 +270,16 @@ void World::movement()
 							printf("Door is closed\n");
 						}
 					}
-					if (i == 22 && (exit + i)->origin != player->location)
+					if (i == 21 && (exit + i)->origin != player->location)
 					{
 						printf("You cant go there!\n");
 					}
 				}
 
 			}
-			if (strcmp(East, first) == 0 || strcmp(e, first) == 0)
+			else if (strcmp("east", first) == 0 || strcmp("e", first) == 0)
 			{
-				for (i = 0; i <= 22; i++)
+				for (i = 0; i <= 21; i++)
 				{
 					if (((exit + i)->direction == east) && (exit + i)->origin == player->location)
 					{
@@ -295,6 +290,7 @@ void World::movement()
 
 							(player->location) = (exit + i)->destination;
 							printf("You are now in the %s\n", (player->location));
+							printf("%s\n", (player->location->description));
 							break;
 						}
 
@@ -303,16 +299,16 @@ void World::movement()
 							printf("Door is closed\n");
 						}
 					}
-					if (i == 22 && (exit + i)->origin != player->location)
+					if (i == 21 && (exit + i)->destination != player->location)
 					{
 						printf("You cant go there!\n");
 					}
 				}
 
 			}
-			if (strcmp(South, first) == 0 || strcmp(s, first) == 0)
+			else if (strcmp("south", first) == 0 || strcmp("s", first) == 0)
 			{
-				for (i = 0; i <= 22; i++)
+				for (i = 0; i <= 21; i++)
 				{
 					if (((exit + i)->direction == south) && (exit + i)->origin == player->location)
 					{
@@ -323,26 +319,29 @@ void World::movement()
 
 							(player->location) = (exit + i)->destination;
 							printf("You are now in the %s\n", (player->location));
+							printf("%s\n", (player->location->description));
 							break;
 						}
-
+						
 						else if ((exit + i)->close == true)
 						{
 							printf("Door is closed\n");
 						}
 					}
-					if (i == 22 && (exit + i)->origin != player->location)
+					if (i == 21 && (exit + i)->destination != player->location)
 					{
 						printf("You cant go there!\n");
+						break;
 					}
 				}
 
 			}
-			if (strcmp(open, first) == 0)
+			else if (strcmp("open", first) == 0)
 			{
-				for (i = 0; i <= 22; ++i)
+				for (i = 0; i <= 21; ++i)
 				{
-					if ((exit + i)->close==true && (exit + i)->origin == player->location)
+
+					if ((exit + i)->close == true && (exit + i)->origin == player->location && (((exit + i)->direction == east) || (exit + i)->direction == west))//3rd and 4rth  conditions are as the only real door can be acceded from left or right
 					{
 						((exit + i))->close = false;
 						printf("The Door has opened\n");
@@ -357,11 +356,11 @@ void World::movement()
 				
 
 			}
-			if (strcmp(close, first) == 0)
+			else if (strcmp("close", first) == 0)
 			{
-				for (i = 0; i <= 22; ++i)
+				for (i = 0; i <= 21; ++i)
 				{
-					if ((exit + i)->close == false && (exit + i)->origin == player->location && player->location == room +3 || player->location == room + 1)//the third and fourth components are to check that just the Shop door can be closed
+					if ((exit + i)->close == false && (exit + i)->origin == player->location && (player->location == room + 3 && (exit + i)->direction == west) || (player->location == room + 1 && ((exit + i)->direction == east) )) //the third and fourth contidions are to check that just the Shop door can be closed
 					{
 						((exit + i))->close = true;
 						printf("You've closed the door\n");
@@ -376,7 +375,7 @@ void World::movement()
 
 
 			}
-			if (strcmp(go, first) == 0)
+			else if (strcmp("go", first) == 0)
 			{
 				
 					
@@ -387,10 +386,10 @@ void World::movement()
 				
 
 			}
-			if (strcmp(look, first) == 0)
+			else if (strcmp("look", first) == 0)
 			{
 
-				for (i = 0; i < 22; i++)
+				for (i = 0; i < 21; i++)
 				{
 					if ((exit + i)->origin == player->location)
 					{
@@ -402,23 +401,32 @@ void World::movement()
 					}
 				}
 			}
-			if (strcmp(help, first) == 0)
+			else if (strcmp("help", first) == 0)
 			{
 
 
-						printf("Welcome to the Hunt.\n Its hunt or be hunted.\n Here are some tips for you to survive in this game:\n use n/s/w/e or north / south /east /west to move\n you can open the door of the shop\n Good luck\n");
+						printf("Welcome to the Hunt.\n Its hunt or be hunted.\n Here are some tips for you to survive in this game:\n use n/s/w/e or north / south /east /west to move\n you can open the door of the shop just by typing open \n you can check your room or the near ones by typing look  alone or with the direction\n Good luck\n");
 						
 					
-				}
+			}
+			else if (strcmp("quit", first) == 0)//Just created it so quit doesn't count as an unkown comand
+			{
+				break;
+			}
+			else
+			{
+				printf("unknown command :(\n");
+			}
 		}
 		if (second != NULL) //TWO WORDS
 		{
 			//GO
-			if (strcmp(go, first)==0)
+			if (strcmp("go", first)==0)
 			{
-				if (*second == *North || *second == *n)
+				if (strcmp("north", second) == 0 || strcmp("n", second) == 0)
 				{
-					for (i = 0; i <= 22; i++)
+
+					for (i = 0; i <= 21; i++)
 					{
 						if (((exit + i)->direction == north) && (exit + i)->origin == player->location)
 						{
@@ -430,6 +438,7 @@ void World::movement()
 
 								(player->location) = (exit + i)->destination;
 								printf("You are now in the %s\n", (player->location));
+								printf("%s\n", (player->location->description));
 								break;
 							}
 
@@ -438,15 +447,15 @@ void World::movement()
 								printf("Door is closed\n");
 							}
 						}
-						if (i == 22 && (exit + i)->origin != player->location)
+						if (i == 21 && (exit + i)->destination != player->location)
 						{
 							printf("You cant go there!\n");
 						}
 					}
 				}
-				if (*second == *West || *second == *w)
+				else if (strcmp("west", second) == 0 || strcmp("w", second) == 0)
 				{
-					for (i = 0; i <= 22; i++)
+					for (i = 0; i <= 21; i++)
 					{
 						if (((exit + i)->direction == west) && (exit + i)->origin == player->location)
 						{
@@ -457,6 +466,7 @@ void World::movement()
 
 								(player->location) = (exit + i)->destination;
 								printf("You are now in the %s\n", (player->location));
+								printf("%s\n", (player->location->description));
 								break;
 							}
 
@@ -465,17 +475,16 @@ void World::movement()
 								printf("Door is closed\n");
 							}
 						}
-						if (i == 22 && (exit + i)->origin != player->location)
+						if (i == 21 && (exit + i)->destination != player->location)
 						{
 							printf("You cant go there!\n");
 						}
 					}
 
-
 				}
-				if (*second == *East || *second == *e)
+				else if (strcmp("east", second) == 0 || strcmp("e", second) == 0)
 				{
-					for (i = 0; i <= 22; i++)
+					for (i = 0; i <= 21; i++)
 					{
 						if (((exit + i)->direction == east) && (exit + i)->origin == player->location)
 						{
@@ -486,6 +495,7 @@ void World::movement()
 
 								(player->location) = (exit + i)->destination;
 								printf("You are now in the %s\n", (player->location));
+								printf("%s\n", (player->location->description));
 								break;
 							}
 
@@ -494,16 +504,16 @@ void World::movement()
 								printf("Door is closed\n");
 							}
 						}
-						if (i == 22 && (exit + i)->origin != player->location)
+						if (i == 21 && (exit + i)->destination != player->location)
 						{
 							printf("You cant go there!\n");
 						}
 					}
 
 				}
-				if (*second == *South || *second == *s)
+				else if (strcmp("south", second) == 0 || strcmp("s", second) == 0)
 				{
-					for (i = 0; i <= 22; i++)
+					for (i = 0; i <= 21; i++)
 					{
 						if (((exit + i)->direction == south) && (exit + i)->origin == player->location)
 						{
@@ -514,6 +524,7 @@ void World::movement()
 
 								(player->location) = (exit + i)->destination;
 								printf("You are now in the %s\n", (player->location));
+								printf("%s\n", (player->location->description));
 								break;
 							}
 
@@ -522,82 +533,127 @@ void World::movement()
 								printf("Door is closed\n");
 							}
 						}
-						if (i == 22 && (exit + i)->origin != player->location)
+						if (i == 21 && (exit + i)->destination != player->location)
 						{
 							printf("You cant go there!\n");
 						}
 					}
 
 				}
+				else
+				{
+					printf("unknown command!\n");
+				}
+
 			}
 			//LOOK
-			if (*first == *look)
+			if (strcmp("look", first) == 0)
 			{
-				if (*second == *North || *second == *n)
+				if (strcmp("north", second) == 0 || strcmp("n", second) == 0)
 				{
-					for (i = 0; i < 22; i++)
+
+					for (i = 0; i <= 22; i++)
 					{
 						if (((exit + i)->direction == north) && (exit + i)->origin == player->location)
 						{
+
 							
-							printf(" %s\n", ((exit + i)->destination));
-							break;
+
+								
+								printf("To the north there is %s\n", (exit + i)->destination->name);
+								break;
+							
+
+							
+						}
+						if (i == 21 && (exit + i)->destination != player->location)
+						{
+							printf("Nothing can be seen!\n");
 						}
 					}
 				}
-				if (*second == *West || *second == *w)
+				else if (strcmp("west", second) == 0 || strcmp("w", second) == 0)
 				{
-					for (i = 0; i < 22; i++)
+					for (i = 0; i <= 21; i++)
 					{
 						if (((exit + i)->direction == west) && (exit + i)->origin == player->location)
 						{
-							//changes Room to destination
+							
 
-							printf(" %s\n", ((exit + i)->destination));
-							break;
+								
+
+								
+								printf("To the west there is %s\n", (exit + i)->destination->name);
+								break;
+							
+
+							
+						}
+						if (i == 21 && (exit + i)->destination != player->location)
+						{
+							printf("Nothing can be seen!\n");
 						}
 					}
 
 				}
-				if (*second == *East || *second == *e)
+				else if (strcmp("east", second) == 0 || strcmp("e", second) == 0)
 				{
-					for (i = 0; i < 22; i++)
+					for (i = 0; i <= 21; i++)
 					{
 						if (((exit + i)->direction == east) && (exit + i)->origin == player->location)
 						{
-							//changes Room to destination
+							
 
-							printf(" %s\n", ((exit + i)->destination));
-							break;
+								
+
+								
+								printf("To the east there is the %s\n", (exit + i)->destination->name);
+								break;
+							
+
+							
+						}
+						if (i == 21 && (exit + i)->destination != player->location)
+						{
+							printf("Nothing can be seen!\n");
 						}
 					}
 
 				}
-				if (*second == *South || *second == *s)
+				else if (strcmp("south", second) == 0 || strcmp("s", second) == 0)
 				{
-					for (i = 0; i < 22; i++)
+					for (i = 0; i <= 21; i++)
 					{
 						if (((exit + i)->direction == south) && (exit + i)->origin == player->location)
 						{
-							//changes Room to destination
+							
 
-							printf(" %s\n", ((exit + i)->destination));
-							break;
+								
+
+								
+								printf("To the south there is the  %s\n", (exit + i)->destination->name);
+								break;
+							
+
+							
+						}
+
+						if (i == 21 && (exit + i)->destination != player->location)
+						{
+							printf("Nothing can be seen!\n");
 						}
 					}
-
+				
 				}
-			}
-			else
-			{
-				printf("unknown command\n");
+				else
+				{
+					printf("unknown command!\n");
+				}
+				
 			}
 			
 		}
-		else
-		{
-			//printf("unknown command\n");
-		}
-	} while (*first != *quit);
+		
+	} while ((!strcmp("quit", first) == 0 ));
 	
 }
