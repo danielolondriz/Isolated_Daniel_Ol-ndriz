@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1723F8FA-5BA1-407E-B460-1BDED6B7AF6A}</ProjectGuid>
-    <RootNamespace>Zork_1</RootNamespace>
+    <ProjectGuid>{AF624995-E05E-4078-8C45-3207ABCCD888}</ProjectGuid>
+    <RootNamespace>Opt_Zork_1</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
