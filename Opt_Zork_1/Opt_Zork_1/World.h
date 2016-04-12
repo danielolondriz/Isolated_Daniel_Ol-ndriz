@@ -27,10 +27,11 @@ public:
 	~World();
 	void createWorld();
 	void movement();
-	
-	void go(const char*, const Exit*, Player*,const dir)const;
+
+	void go(const char*, const Exit*, Player*, const dir)const;
 	void look(const char *, const Exit*, Player*, const dir)const;
-	void compareGO(const char*);
-	void compareLOOK(const char*);
+	void compare(const char*, const char*);
+
+
 
 };
