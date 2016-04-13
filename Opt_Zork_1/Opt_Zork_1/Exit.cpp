@@ -1,14 +1,15 @@
-#include "Room.h"
-#include "Exit.h"
+//#include "Room.h"
+//#include "Exit.h"
+#include "World.h"
 #include<stdio.h>
 #include<stdlib.h>
 
 
-Exit::Exit(Room*origin, Room*dest, dir direction, bool door)
+Exit::Exit(Room*origins, Room*dest, dir directions, bool door, const char* names, const char* descriptions) : Entity(names, descriptions), origin(origins), destination(dest), direction(directions), Door(door)
 {
-	this->origin = origin;
-	this->destination = dest;
-	this->direction = direction;
-	this->Door = door;
-	//printf("%s\n", this->origin->name);
+	/*origin = origins;
+	destination = dest;
+	direction = directions;
+	Door = door;*/
+	printf("%i\n", direction);
 }

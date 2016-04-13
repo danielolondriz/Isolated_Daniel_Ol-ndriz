@@ -1,9 +1,11 @@
+#ifndef _MYSTRING
+#define __MYSTRING
 #include <string.h>
 #include <stdio.h>
-#include <string.h>
 
-class MyString
-{
+#include "Vector.h"
+
+class MyString{
 public: 
 	char* first = nullptr;
 	char* second = nullptr;
@@ -106,16 +108,24 @@ public:
 		strcpy_s(buffer, len, word);
 		return buffer;
 	}
-	void GetWords(const MyString& reference,  MyString& one,  MyString& two)
+	void tokenize(const char* symbol,  Vector <MyString> tokens)
 	{
+		
 		char *Counter;
-		//char *first;
-		//char *second;
-		one.buffer = strtok_s(reference.buffer, " ", &Counter);
-
-		two.buffer = strtok_s(NULL, " ", &Counter);
-		printf("%s", one.buffer);
+		char *word;
+		word = strtok_s(buffer, symbol, &Counter);
+		//strtok_s(NULL, symbol, &Counter);
+		while (buffer != NULL)
+		{
+			tokens.Push_back(buffer);
+			//strtok_s(NULL, symbol, &Counter);
+		}
+		//first->buffer= strtok_s(buffer, symbol, &Counter);
+		//tokens.Push_back(first->buffer);
+		//two.buffer = strtok_s(NULL, " ", &Counter);
+		printf("%s", buffer);
 	}
+
 	void Get(const char* string)
 	{
 		int len = strlen(string);
@@ -125,3 +135,4 @@ public:
 	}
 
 };
+#endif

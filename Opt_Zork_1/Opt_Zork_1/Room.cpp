@@ -1,10 +1,13 @@
-#include "Room.h"
-#include "Exit.h"
+//#include "Room.h"
+#include "World.h"
+//#include "Exit.h"
 #include<stdio.h>
 #include<stdlib.h>
-#include "MyString.h"
 
-Room::Room(const char* name, const char* description)
+
+
+
+Room::Room(const char* names, const char* descriptions) : Entity(names, descriptions)
 {
 	/*
 	int len1 = strlen(name) + 1;
@@ -14,11 +17,9 @@ Room::Room(const char* name, const char* description)
 	strcpy_s(this->name, len1, name);
 	strcpy_s(this->description, len2, description);
 	*/
-	this->name = name;
-	this->description = description;
+	
 }
 Room::~Room()
 {
-	delete[] name;
-	delete[] description;
+	
 }

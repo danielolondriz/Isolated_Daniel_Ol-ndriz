@@ -30,6 +30,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -45,6 +48,12 @@
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
     <ClInclude Include="MyString.h">
+      <Filter>Archivos de código fuente</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Archivos de código fuente</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,13 +1,19 @@
+#ifndef __WORLD_H__
+#define __WORLD_H__
 #include "Room.h"
 #include "Exit.h"
 #include "Player.h"
-#include "MyString.h"
+#include "Entity.h"
+//#include "MyString.h"
+#include "Vector.h"
 
 class World
 {
 public:
-	Player* player;
-	Exit* exit[22];
+	Vector <Player*> player;
+	Vector<Exit*> exit;
+	Vector <Room*> rooms;
+	/*
 	Room *EntrancePlaza;
 	Room *MainStreet;
 	Room *HauntedHouse;
@@ -19,22 +25,23 @@ public:
 	Room *RollerCoaster;
 	Room *Dock;
 	Room *STrainStation;
-	Room *NTrainStation;
+	Room *NTrainStation;*/
 	MyString *TheString;
-	MyString *first ;
-	MyString *second = nullptr;
+	//MyString *first ;
+	//MyString *second = nullptr;
 
 
 public:
 	World();
 	~World();
 	void createWorld();
-	void movement();
+	void movement(Vector<MyString> );
 
-	void go(const MyString*, const Exit*, Player*, const dir)const;
+	void go(const MyString*,  Vector<Exit*>&, Player*, const dir)const;
 	void look(const char *, const Exit*, Player*, const dir)const;
 	void compare(const MyString*, const MyString*);
 
 
 
 };
+#endif
