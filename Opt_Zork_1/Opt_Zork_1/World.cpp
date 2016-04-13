@@ -4,6 +4,9 @@
 
 World::World(){
 	createWorld();
+	TheString = new MyString();
+	first = new MyString();
+	second = new MyString();
 }
 World::~World(){}
 void World::createWorld()
@@ -84,7 +87,7 @@ void World::createWorld()
 	exit[21] = new Exit(HauntedHouse, MainStreet, east, false);
 
 }
-void World::go(const char*word, const Exit* exit, Player*player, const dir dir)const
+void World::go(const MyString*word, const Exit* exit, Player*player, const dir dir)const
 {
 	int i;
 	for (i = 0; i < 22; i++)
@@ -126,70 +129,72 @@ void World::look(const char*word, const Exit* exit, Player*player, const dir dir
 
 
 }
-void World::compare(const char* word1, const char* word2)
+void World::compare(const MyString* word1, const MyString* word2)
 {
-	if (strcmp(word1, "go") == 0)
+	if (*word1 == "go")
 	{
-		if (strcmp(word2, "north") == 0)
+		printf("HEEEY");/*
+		if (*word2 == "north")
 		{
-			go(word2, exit[0], player, north);
+		//go(word2->c_str, exit[0], player, north);
 
 		}
-		if (strcmp(word2, "west") == 0)
+		if (*word2 == "west")
 		{
-			go(word2, exit[0], player, west);
+		//go(word2->c_str, exit[0], player, west);
 		}
-		if (strcmp(word2, "south") == 0)
+		if (*word2 == "south")
 		{
-			go(word2, exit[0], player, south);
+		//go(word2->c_str, exit[0], player, south);
 		}
-		if (strcmp(word2, "east") == 0)
+		if (*word2 == "east")
 		{
-			go(word2, exit[0], player, east);
+		//go(word2->c_str, exit[0], player, east);
 		}
-	}
-	else if (strcmp(word1, "look") == 0)
+		}
+		else if (*word1 == "look")
 
-	{
+		{
 
-		if (strcmp(word2, "north") == 0)
+		if (*word2 == "north")
 		{
-			look(word2, exit[0], player, north);
-
-		}
-		if (strcmp(word2, "west") == 0)
-		{
-			look(word2, exit[0], player, west);
-		}
-		if (strcmp(word2, "south") == 0)
-		{
-			look(word2, exit[0], player, south);
-		}
-		if (strcmp(word2, "east") == 0)
-		{
-			look(word2, exit[0], player, east);
-		}
-	}
-	else if (word2 == nullptr)
-	{
-		if (strcmp(word1, "north") == 0)
-		{
-			go(word1, exit[0], player, north);
+		//look(word2->c_str, exit[0], player, north);
 
 		}
-		if (strcmp(word1, "west") == 0)
+		if (*word2 == "west")
 		{
-			go(word1, exit[0], player, west);
+		//look(word2->c_str, exit[0], player, west);
 		}
-		if (strcmp(word1, "south") == 0)
+		if (*word2 == "south")
 		{
-			go(word1, exit[0], player, south);
+		//look(word2->c_str, exit[0], player, south);
 		}
-		if (strcmp(word1, "east") == 0)
+		if (*word2 == "east")
 		{
-			go(word1, exit[0], player, east);
+		//look(word2->c_str, exit[0], player, east);
+		}
+		}
+		else if (word2 == nullptr)
+		{
+		if (*word1 == "north")
+		{
+		//go(word1->c_str, exit[0], player, north);
+
+		}
+		if (*word1 == "west")
+		{
+		//go(word1->c_str, exit[0], player, west);
+		}
+		if (*word1 == "south")
+		{
+		//go(word1->c_str, exit[0], player, south);
+		}
+		if (*word1 == "east")
+		{
+		//go(word1->c_str, exit[0], player, east);
 		}
 
+		}*/
 	}
 
 }
@@ -198,22 +203,18 @@ void World::compare(const char* word1, const char* word2)
 void World::movement()
 {
 
-	char answer[20];
+	char answer [20];
 	char *Counter;
-	char *first;
-	char *second;
+	
 	player->location = EntrancePlaza;
 	printf("You are now in %s\n", player->location->name);
-	do
-	{
+	
 		printf("What do you want to do?\n");
 		gets_s(answer);
-		//saves the 2 words
-		first = strtok_s(answer, " ", &Counter);
-	} while (first == NULL);//while there is no answer
-	second = strtok_s(NULL, " ", &Counter);
-
-	compare(first, second);
+		TheString->Get(answer);
+	//	TheString->GetWords(answer,first,second);
+		//printf("%s", first->c_str());
+		//compare(*first,second);
 
 
 
