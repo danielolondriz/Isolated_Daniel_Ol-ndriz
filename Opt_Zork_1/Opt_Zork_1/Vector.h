@@ -54,7 +54,7 @@ public:
 	{
 
 		TYPE* temp = nullptr;
-		/*if (num_elements == capacity)
+		if (num_elements == capacity)
 		{
 		capacity *= 2;
 		temp = new TYPE[capacity];
@@ -64,7 +64,7 @@ public:
 		}
 		delete[]buffer;
 		buffer = temp;
-		}*/
+		}
 		for (TYPE i = num_elements; i >= 0; i--)
 		{
 			*(buffer + i + 1) = *(buffer + i);
@@ -85,4 +85,6 @@ public:
 
 
 };
+
+
 #endif

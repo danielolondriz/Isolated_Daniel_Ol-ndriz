@@ -79,13 +79,13 @@ public:
 	void operator = (const MyString& one)
 	{
 
-		//int lenght = strlen(one.buffer)+1;
+		int lenght = (strlen(one.buffer)+1);
 
-		if ((strlen(one.buffer) + 1 > MaxSize)) //Revise
+		if ((MaxSize < lenght)) //Revise
 		{
 
 			delete[]buffer;
-			MaxSize = (strlen(one.buffer) + 1);
+			MaxSize = lenght;
 			buffer = new char[MaxSize];
 		}
 
@@ -108,23 +108,28 @@ public:
 		strcpy_s(buffer, len, word);
 		return buffer;
 	}
-	void tokenize(const char* symbol,  Vector <MyString> tokens)
+	
+	Vector<MyString> tokenize(const char* symbol, char* option)
 	{
-		
+
 		char *Counter;
-		char *word;
-		word = strtok_s(buffer, symbol, &Counter);
-		//strtok_s(NULL, symbol, &Counter);
-		while (buffer != NULL)
+		char* single;
+		char*temporal;
+		Vector <MyString> tokens;
+		unsigned int length = strlen(option) + 1;
+		temporal = new char[length];
+		strcpy_s(temporal, length, option);
+		single = strtok_s(temporal, symbol, &Counter);
+		printf("%s", single);
+		while (single != NULL)
 		{
-			tokens.Push_back(buffer);
-			//strtok_s(NULL, symbol, &Counter);
+			//tokens.Push_back(single);
+			single = strtok_s(NULL, symbol, &Counter);
 		}
-		//first->buffer= strtok_s(buffer, symbol, &Counter);
-		//tokens.Push_back(first->buffer);
-		//two.buffer = strtok_s(NULL, " ", &Counter);
-		printf("%s", buffer);
+		delete[] temporal;
+		return tokens;
 	}
+
 
 	void Get(const char* string)
 	{

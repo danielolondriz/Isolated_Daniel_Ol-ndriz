@@ -229,11 +229,12 @@ void World::movement(Vector<MyString> tokens)
 	
 		printf("What do you want to do?\n");
 		gets_s(answer);
-		TheString->Get(answer);
-		//TheString->tokenize(" ", tokens);
+		//TheString->Get(answer);
+		TheString->tokenize(" ", answer);
+
 	//	TheString->GetWords(answer,first,second);
 		//printf("%s", first->c_str());
-		compare(TheString,nullptr);
+		//compare(TheString,nullptr);
 
 
 
