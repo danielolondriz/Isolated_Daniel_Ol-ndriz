@@ -7,7 +7,7 @@
 
 
 
-Room::Room(const char* names, const char* descriptions) : Entity(names, descriptions)
+Room::Room(const char* names, const char* descriptions, bool ligths, bool opens) : Entity(names, descriptions), light(ligths), lightopen(opens)
 {
 	/*
 	int len1 = strlen(name) + 1;

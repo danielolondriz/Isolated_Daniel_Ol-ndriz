@@ -28,29 +28,29 @@ void World::createWorld()
 	
 	//ROOMS
 	{
-		rooms.Push_back(EntrancePlaza = new Room("Entrance Plaza", "This is the Entrance Plaza of the park. A rusty statue stands in the middle.\n In the North there is the main street.\n And in the west you can see a Train Station"));
+		rooms.Push_back(EntrancePlaza = new Room("Entrance Plaza", "This is the Entrance Plaza of the park. A rusty statue stands in the middle.\n In the North there is the main street.\n And in the west you can see a Train Station", false, true));
 
-		rooms.Push_back(MainStreet = new Room("Main Street", "This is the glorious Main Street. On your left you can see a dark haunted house. On your right a Shop, and in front of you the street continues."));
+		rooms.Push_back(MainStreet = new Room("Main Street", "This is the glorious Main Street. On your left you can see a dark haunted house. On your right a Shop, and in front of you the street continues.", false, true));
 
-		rooms.Push_back(HauntedHouse = new Room("Haunted House", "It's such a dark place, that noone would like to be in."));
+		rooms.Push_back(HauntedHouse = new Room("Haunted House", "It's such a dark place, that noone would like to be in.",true,false));
 
-		rooms.Push_back(Shop = new Room("Shop", "The Shop looks quite abandoned. On one side you can see a selling machine."));
+		rooms.Push_back(Shop = new Room("Shop", "The Shop looks quite abandoned. On one side you can see a selling machine.", false, true));
 
-		rooms.Push_back(EndofStreet = new Room("End of the Street", "Looks like the Main street ends here. You can either go left to  the Ferris Wheel, or go down to your right, where a dark looking underground passage is located."));
+		rooms.Push_back(EndofStreet = new Room("End of the Street", "Looks like the Main street ends here. You can either go left to  the Ferris Wheel, or go down to your right, where a dark looking underground passage is located.", false, true));
 
-		rooms.Push_back(FerrisWheel = new Room("Ferris Wheel", "You stand in front of the rusted old Ferris Wheel. it doesn't seem to work"));
+		rooms.Push_back(FerrisWheel = new Room("Ferris Wheel", "You stand in front of the rusted old Ferris Wheel. it doesn't seem to work", false, true));
 
-		rooms.Push_back(Underground = new Room("Underground Passage", "Between all the rubish you can see light coming from the north"));
+		rooms.Push_back(Underground = new Room("Underground Passage", "Between all the rubish you can see light coming from the north",true,false));
 
-		rooms.Push_back(Fountain = new Room("Fountain Plaza", "A big Plaza stands in front of you. An abandoned Roller coaster can be seen on your right, a Dock far in the North. Another building can be seen on your left with the name north train Station on it."));
+		rooms.Push_back(Fountain = new Room("Fountain Plaza", "A big Plaza stands in front of you. An abandoned Roller coaster can be seen on your right, a Dock far in the North. Another building can be seen on your left with the name north train Station on it.", false, true));
 
-		rooms.Push_back(RollerCoaster = new Room("Roller Coaster", "Since the power is off, the old looking Roller coaster wont work.\n"));
+		rooms.Push_back(RollerCoaster = new Room("Roller Coaster", "Since the power is off, the old looking Roller coaster wont work.\n", false, true));
 
-		rooms.Push_back(Dock = new Room("Dock", "A Boat stands in front of you but, it's cabin is locked with a keychain.\n"));
+		rooms.Push_back(Dock = new Room("Dock", "A Boat stands in front of you but, it's cabin is locked with a keychain.\n", false, true));
 
-		rooms.Push_back(STrainStation = new Room("South Train Station", "This is the south train station. There is a train, but it doesn't seem to work.\n"));
+		rooms.Push_back(STrainStation = new Room("South Train Station", "This is the south train station. There is a train, but it doesn't seem to work.\n", false, true));
 
-		rooms.Push_back(NTrainStation = new Room("North Train Station", "This is the magestic North train station. Yet no train seems to be coming...\n"));
+		rooms.Push_back(NTrainStation = new Room("North Train Station", "This is the magestic North train station. Yet no train seems to be coming...\n", false, true));
 	}
 	//ITEMS
 	items.Push_back(new Item("flashlight", "This is a flashlight", Shop, false, false));
@@ -230,9 +230,16 @@ void World::go( const Vector<Exit*>& exit, Vector <Player*>& player, const dir d
 			{
 				if (exit[i]->Door == false)
 				{
-					player[0]->location = exit[i]->destination;
-
-					break;
+					if (exit[i]->destination->lightopen == true)
+					{
+						player[0]->location = exit[i]->destination;
+						break;
+					}
+					else
+					{
+						printf("\nYou don't want to go to a dark place like that\n");
+					}
+					
 				}
 				else
 				{
@@ -333,6 +340,32 @@ void World::inventory(Vector<Item*>& items)
 	if (empty == 0)
 	{
 		printf("Nothing\n\n");
+	}
+}
+void World::ligth(const Vector < Room*>& room)
+{
+	for (int i = 0; i < 12; i++)
+	{
+		if (room[i]->light == true)
+		{
+			if (room[i]->lightopen == false)
+			{
+				room[i]->lightopen = true;
+			}
+		}
+	}
+}
+void World::unligth(const Vector < Room*>& room)
+{
+	for (int i = 0; i < 12; i++)
+	{
+		if (room[i]->light == true)
+		{
+			if (room[i]->lightopen == true)
+			{
+				room[i]->lightopen = false;
+			}
+		}
 	}
 }
 void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& INVsize )
@@ -466,6 +499,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 				take(player, items, word,INVsize);
 			}
 			
+			
 		}
 		if (word[0] == "drop")
 		{
@@ -477,23 +511,34 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		}
 		if (word[0] == "equip")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket"))
 			{
 				equip(player, items, word,EQsize);
+			}
+			if ((word[1] == "flashlight"))
+			{
+				equip(player, items, word, EQsize);
+				ligth(rooms);
+			}
 			}
 
 		}
 		if (word[0] == "unequip")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket"))
 			{
 				unequip(player, items, word,EQsize);
+			}
+			if ((word[1] == "flashlight"))
+			{
+				unequip(player, items, word, EQsize);
+				unligth(rooms);
 			}
 
 		}
 			
 		}
-	}
+	
 
 
 		

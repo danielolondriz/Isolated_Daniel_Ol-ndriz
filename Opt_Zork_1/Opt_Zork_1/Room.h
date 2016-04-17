@@ -4,11 +4,13 @@
 class MyString;
 class Room : public Entity
 {
-
+public:
+	bool light;
+	bool lightopen;
 	
 public:
 
-	Room( const char *, const char*);
+	Room( const char *, const char*,bool,bool);
 	~Room();
 };
 #endif
