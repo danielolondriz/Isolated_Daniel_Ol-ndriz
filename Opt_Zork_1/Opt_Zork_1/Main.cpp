@@ -3,10 +3,10 @@
 #include<stdlib.h>
 #include "world.h"
 int main(){
-	Vector <MyString> tokens;
+	
 	World world;
 	world.createWorld();
-	world.movement(tokens);
+	world.movement();
 
 	getchar();
 	return 0;

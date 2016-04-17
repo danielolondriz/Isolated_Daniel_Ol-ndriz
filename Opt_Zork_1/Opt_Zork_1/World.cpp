@@ -218,9 +218,9 @@ void World::compare(const MyString* word1, const MyString* word2)
 
 
 
-void World::movement(Vector<MyString> tokens)
+void World::movement()
 {
-	
+	Vector <MyString> tokens;
 	char answer [20];
 	char *Counter;
 	//rooms[4]->name;
@@ -230,7 +230,8 @@ void World::movement(Vector<MyString> tokens)
 		printf("What do you want to do?\n");
 		gets_s(answer);
 		//TheString->Get(answer);
-		TheString->tokenize(" ", answer);
+		tokens = TheString->tokenize(" ", answer);
+		printf("%s", tokens[1]);
 
 	//	TheString->GetWords(answer,first,second);
 		//printf("%s", first->c_str());

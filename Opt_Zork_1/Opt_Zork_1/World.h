@@ -26,6 +26,7 @@ public:
 	Room *Dock;
 	Room *STrainStation;
 	Room *NTrainStation;*/
+	
 	MyString *TheString;
 	//MyString *first ;
 	//MyString *second = nullptr;
@@ -35,7 +36,7 @@ public:
 	World();
 	~World();
 	void createWorld();
-	void movement(Vector<MyString> );
+	void movement();
 
 	void go(const MyString*,  Vector<Exit*>&, Player*, const dir)const;
 	void look(const char *, const Exit*, Player*, const dir)const;

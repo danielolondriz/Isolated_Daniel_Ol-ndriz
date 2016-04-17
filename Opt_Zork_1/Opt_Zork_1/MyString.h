@@ -2,42 +2,39 @@
 #define __MYSTRING
 #include <string.h>
 #include <stdio.h>
-
 #include "Vector.h"
 
 class MyString{
-public: 
-	char* first = nullptr;
-	char* second = nullptr;
+
 private:
 	char* buffer = nullptr;
 	
-	unsigned int MaxSize;
+	unsigned int MaxSize = 50;
 public:
-	MyString(){}
+	MyString()
+	{
+	unsigned int MinSize = 1;
+	buffer = new char[MinSize];
+	}
 
 	MyString(const char* str)
 	{
-		int len = (strlen(str));
-		buffer = new char[len + 1];
-		MaxSize = len + 1;
-		strcpy_s(buffer, len + 1, str);
+		int length = (strlen(str))+1;
+		buffer = new char[length];
+		MaxSize = length;
+		strcpy_s(buffer, length, str);
 		
 
 	}
 	MyString(const MyString& str)
 	{
-		int len = (strlen(str.buffer));
-		buffer = new char[len + 1];
-		MaxSize = len + 1;
-		strcpy_s(this->buffer, len + 1, str.buffer);
+		int length = (strlen(str.buffer)+1);
+		buffer = new char[length];
+		MaxSize = length;
+		strcpy_s(this->buffer, length, str.buffer);
 		
 	}
-	~MyString()
-	{
-		delete[] buffer;
-		
-	}
+	
 	unsigned int MyLength() const
 	{
 		int length = (strlen(buffer));
@@ -73,8 +70,6 @@ public:
 	int lenght = strlen(temp) + strlen(one.buffer) + 1;
 	buffer = new char[lenght];
 	strcpy_s(buffer, lenght, temp);
-
-
 	}*/
 	void operator = (const MyString& one)
 	{
@@ -120,11 +115,12 @@ public:
 		temporal = new char[length];
 		strcpy_s(temporal, length, option);
 		single = strtok_s(temporal, symbol, &Counter);
-		printf("%s", single);
+		
 		while (single != NULL)
 		{
-			//tokens.Push_back(single);
+			tokens.Push_back(single);
 			single = strtok_s(NULL, symbol, &Counter);
+			
 		}
 		delete[] temporal;
 		return tokens;
@@ -138,6 +134,12 @@ public:
 		buffer = new char[len + 1];
 		strcpy_s(buffer, len + 1, string);
 	}
+	~MyString()
+	{
+	delete[] buffer;
+
+	}
 
 };
+
 #endif
