@@ -9,6 +9,6 @@ public:
 	dir direction;
 public:
 	Exit(Room*, Room*, dir, bool, const char*, const char*);
-
+	~Exit();
 
 };

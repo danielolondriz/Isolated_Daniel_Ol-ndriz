@@ -13,3 +13,5 @@ Exit::Exit(Room*origins, Room*dest, dir directions, bool door, const char* names
 	Door = door;*/
 	
 }
+Exit::~Exit()
+{}

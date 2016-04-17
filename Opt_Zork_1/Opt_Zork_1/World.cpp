@@ -1,6 +1,6 @@
 #include "World.h"
-
 #include<stdio.h>
+#define MAX_ITEMS 4
 
 World::World(){
 	createWorld();
@@ -51,6 +51,14 @@ void World::createWorld()
 
 		rooms.Push_back(NTrainStation = new Room("North Train Station", "This is the magestic North train station. Yet no train seems to be coming...\n"));
 	}
+	//ITEMS
+	items.Push_back(new Item("flashlight", "This is a flashlight", Shop, false, false));
+
+	items.Push_back(new Item("crowbar", "This is a crowbar", FerrisWheel, false, false));
+
+	items.Push_back(new Item("ticket", "This is a Train Ticket", Shop, false, false));
+
+	items.Push_back(new Item("knife", "This is a Knife", RollerCoaster, false, false));
 	//EXITS
 	//Exit* exit[22];
 	exit.Push_back(new Exit(EntrancePlaza, MainStreet, north, false,"main street","you see the Main street"));
@@ -98,6 +106,95 @@ void World::createWorld()
 
 	exit.Push_back(new Exit(HauntedHouse, MainStreet, east, false, "main street", "you see the Main street"));
 	
+
+}
+void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+{
+	
+		
+		for (int i = 0; i < MAX_ITEMS; i++)
+		{
+			
+			if (items[i]->name == words[1].C_Str())
+			{
+				
+				if (items[i]->location == player[0]->location)
+				{
+					if (items[i]->inventory == false)
+					{
+						items[i]->inventory = true;
+						printf("\n\nyou've picked the %s!\n\n",items[i]->name);
+					}
+				}
+			}
+
+		}
+	
+}
+void World::drop(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+{
+
+
+	for (int i = 0; i < MAX_ITEMS; i++)
+	{
+
+		if (items[i]->name == words[1].C_Str())
+		{
+			if (items[i]->inventory == true)
+			{
+
+				items[i]->inventory = false;
+				items[i]->equip = false;
+				items[i]->location = player[0]->location;
+				printf("\n\nYou've dropped the %s!\n\n", items[i]->name);
+			}
+		}
+
+	}
+
+}
+void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+{
+
+
+	for (int i = 0; i < MAX_ITEMS; i++)
+	{
+		if (items[i]->name == words[1].C_Str())
+		{
+			if (items[i]->inventory == true)
+			{
+				if (items[i]->equip == false)
+				{
+					items[i]->equip = true;
+					printf("\n\nYou've equipped the %s!\n\n", items[i]->name);
+				}
+			}
+		}
+		
+
+	}
+
+}
+void World::unequip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+{
+
+
+	for (int i = 0; i < MAX_ITEMS; i++)
+	{
+		if (items[i]->name == words[1].C_Str())
+		{
+			if (items[i]->inventory == true)
+			{
+				if (items[i]->equip == true)
+				{
+					items[i]->equip = false;
+					printf("\n\nYou've unequipped the %s!\n\n", items[i]->name);
+				}
+			}
+		}
+
+
+	}
 
 }
 
@@ -175,6 +272,7 @@ void World::open(const Vector<Exit*>& exit, Vector <Player*>& player, const dir 
 				//break;
 			}
 		}
+		
 	}
 }
 void World::close(const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
@@ -198,33 +296,23 @@ void World::close(const Vector<Exit*>& exit, Vector <Player*>& player, const dir
 			}
 		}
 		
-		/*
-		if (exit[i]->direction == dir)
+		
+	}
+}
+void World::inventory(Vector<Item*>& items)
+{
+	int empty = 0;
+	for (int i = 0; i < MAX_ITEMS; i++)
+	{
+		if (items[i]->inventory == true)
 		{
-			if (player[0]->location == exit[19]->origin || player[0]->location == exit[19]->destination||player[0]->location == exit[1]->origin || player[0]->location == exit[1]->destination)
-			{
-				if (exit[i]->Door == false)
-				{
-					exit[i]->Door = true;
-					printf("Door has been closed\n");
-					//break;
-				}
-			}
-
+			printf("A %s\n", items[i]->name);
+			empty++;
 		}
-		if (exit[i]->direction == west || exit[i]->direction == east)
-		{
-
-			if (player[0]->location == exit[19]->origin || player[0]->location == exit[19]->destination || player[0]->location == exit[1]->origin || player[0]->location == exit[1]->destination)
-			{
-				if (exit[i]->Door == false)
-				{
-					exit[i]->Door = true;
-					printf("Door has been closed!!\n");
-					//break;
-				}
-			}
-		}*/
+	}
+	if (empty == 0)
+	{
+		printf("Nothing\n\n");
 	}
 }
 void World::compare(Vector<MyString>& word)
@@ -259,6 +347,12 @@ void World::compare(Vector<MyString>& word)
 		if (word[0] == "open")
 		{
 			printf("Which direction do you want to open?\n");
+		}
+		if (word[0] == "inventory" || word[0] == "i")
+		{
+			printf("You have:\n");
+			inventory(items);
+			
 		}
 	}
 	if (size == 2)//2 WORDS
@@ -344,10 +438,44 @@ void World::compare(Vector<MyString>& word)
 				close(exit, player, east);
 			}
 		}
+		if (word[0] == "take")
+		{
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
+			{
+				take(player, items, word);
+			}
+			
+		}
+		if (word[0] == "drop")
+		{
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
+			{
+				drop(player, items, word);
+			}
+
+		}
+		if (word[0] == "equip")
+		{
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
+			{
+				equip(player, items, word);
+			}
+
+		}
+		if (word[0] == "unequip")
+		{
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
+			{
+				unequip(player, items, word);
+			}
+
+		}
+			
+		}
 	}
 
 
-		}
+		
 	
 
 
@@ -367,7 +495,7 @@ void World::movement()
 	
 	do
 	{
-		printf("You are now in %s\n", player[0]->location->name.c_str());
+		printf("You are now in %s\n", player[0]->location->name.C_Str());
 		printf("What do you want to do?\n");
 		gets_s(answer);
 		StringAnswer.Get(answer);
@@ -376,7 +504,7 @@ void World::movement()
 			break;
 		}
 		
-		tokens = TheString->tokenize(" ", answer);
+		tokens = TheString->Tokenize(" ", answer);
 		//printf("%s", tokens[1]);
 
 		//	TheString->GetWords(answer,first,second);

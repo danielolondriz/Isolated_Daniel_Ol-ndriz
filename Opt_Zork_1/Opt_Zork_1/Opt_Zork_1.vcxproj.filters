@@ -36,7 +36,7 @@
     <ClCompile Include="MyString.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
+    <ClCompile Include="MyItem.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClInclude Include="Entity.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
+    <ClInclude Include="MyItem.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
   </ItemGroup>

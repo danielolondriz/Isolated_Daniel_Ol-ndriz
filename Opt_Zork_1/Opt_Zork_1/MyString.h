@@ -3,7 +3,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "Vector.h"
-
+typedef unsigned int uint;
+/*
 class MyString{
 
 private:
@@ -76,7 +77,7 @@ public:
 	int lenght = strlen(temp) + strlen(one.buffer) + 1;
 	buffer = new char[lenght];
 	strcpy_s(buffer, lenght, temp);
-	}*/
+	}
 	void operator = (const MyString& one)
 	{
 
@@ -100,6 +101,13 @@ public:
 		strcpy_s(third.buffer, lenght, buffer);
 		strcat_s(third.buffer, lenght, one.buffer);
 		return third;
+	}
+	void Get(const char* string)
+	{
+		int len = strlen(string);
+		delete[]buffer;
+		buffer = new char[len + 1];
+		strcpy_s(buffer, len + 1, string);
 	}
 	//EXTRA OPERATIONS FOR ZORK
 	MyString operator = (const char* word)
@@ -133,19 +141,39 @@ public:
 	}
 
 
-	void Get(const char* string)
-	{
-		int len = strlen(string);
-		delete[]buffer;
-		buffer = new char[len + 1];
-		strcpy_s(buffer, len + 1, string);
-	}
+	
 	~MyString()
 	{
 	delete[] buffer;
 
 	}
 
-};
+};*/
 
+class MyString{
+private:
+char *buffer = nullptr;
+unsigned int maxcapacity=50;
+public:
+const char* C_Str() const;
+MyString();
+MyString(const char* STR);
+MyString(const MyString& otherclas);
+unsigned int lenght();
+bool empty() const;
+bool operator ==(const MyString& otherclas) const;
+bool operator ==(const char* otherstring) const;
+bool operator !=(const char* otherstring) const;
+void operator =(const MyString& otherclas);
+void operator =(const char* otherstring);
+void operator +=(const MyString& otherclas);
+MyString operator+(const MyString &otherclas);
+bool SameLenght(const MyString& str);
+bool IsSmaller(const MyString& str);
+void clear();
+void set();
+void Get(const char*);
+Vector<MyString> Tokenize(const char *parameters, char* option);
+~MyString();
+};
 #endif
