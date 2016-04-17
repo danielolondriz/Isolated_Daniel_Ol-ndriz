@@ -13,19 +13,7 @@ public:
 	Vector <Player*> player;
 	Vector<Exit*> exit;
 	Vector <Room*> rooms;
-	/*
-	Room *EntrancePlaza;
-	Room *MainStreet;
-	Room *HauntedHouse;
-	Room *Shop;
-	Room *EndofStreet;
-	Room *FerrisWheel;
-	Room *Underground;
-	Room *Fountain;
-	Room *RollerCoaster;
-	Room *Dock;
-	Room *STrainStation;
-	Room *NTrainStation;*/
+
 	
 	MyString *TheString;
 	//MyString *first ;
@@ -40,6 +28,8 @@ public:
 
 	void go( const Vector<Exit*>&, Vector <Player*>&, const dir)const;
 	void look(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
+	void open(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
+	void close(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
 	void compare(Vector<MyString>&);
 
 

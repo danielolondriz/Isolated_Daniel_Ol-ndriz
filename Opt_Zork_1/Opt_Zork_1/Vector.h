@@ -78,6 +78,11 @@ public:
 		assert(word < num_elements);
 		return buffer[word];
 	}
+	TYPE operator[](unsigned int word)
+	{
+		assert(word < num_elements);
+		return buffer[word];
+	}
 	unsigned int size()
 	{
 		return num_elements;

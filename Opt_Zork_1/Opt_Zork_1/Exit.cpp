@@ -11,5 +11,5 @@ Exit::Exit(Room*origins, Room*dest, dir directions, bool door, const char* names
 	destination = dest;
 	direction = directions;
 	Door = door;*/
-	printf("%i\n", direction);
+	
 }
