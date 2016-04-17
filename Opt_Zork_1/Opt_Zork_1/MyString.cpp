@@ -1,144 +1,130 @@
 #include"MyString.h"
 
+MyString::MyString()
 
-const char* MyString::C_Str() const{//to print buffer in main
-	return buffer;
-}
-MyString::MyString(){
-	maxcapacity = 1;
-	buffer = new char[maxcapacity];
-}
-
-MyString::MyString(const char* STR){
-	int len = (strlen(STR)) + 1;
-	maxcapacity = len;
-	buffer = new char[len];//+1 because '\0'
-	strcpy_s(buffer, len, STR);
-}
-
-MyString::MyString(const MyString& otherclas){
-	int len = (strlen(otherclas.buffer)) + 1;
-	maxcapacity = len;
-	buffer = new char[len];//+1 because '\0'
-	strcpy_s(buffer, len, otherclas.buffer);
-}
-
-unsigned int MyString::lenght(){
-	unsigned int i = strlen(buffer);
-	return i;
-}
-
-bool MyString::empty() const{
-	return strlen(buffer) == 0;
-}
-
-bool MyString::operator ==(const MyString& otherclas) const{
-	return strcmp(buffer, otherclas.buffer) == 0;
-}
-
-bool MyString::operator ==(const char* otherstring) const{
-	return strcmp(buffer, otherstring) == 0;
-}
-
-bool MyString::operator !=(const char* otherstring) const{
-	return strcmp(buffer, otherstring) != 0;
-}
-
-void MyString::operator =(const MyString& otherclas){
-	int lent = (strlen(otherclas.buffer) + 1);
-	if (maxcapacity < lent){
-		delete[]buffer;
-		maxcapacity = lent;
-		buffer = new char[maxcapacity];
-	}
-	strcpy_s(buffer, maxcapacity, otherclas.buffer);
-}
-
-void MyString::operator =(const char* otherstring){
-	int lent = (strlen(otherstring) + 1);
-	if (maxcapacity < lent){
-		delete[]buffer;
-		maxcapacity = lent;
-		buffer = new char[maxcapacity];
-	}
-	strcpy_s(buffer, maxcapacity, otherstring);
-}
-
-
-void MyString::operator +=(const MyString& otherclas){
-	int lent = (strlen(otherclas.buffer) + lenght() + 1);
-	if (maxcapacity < lent){
-		char *temp = nullptr;
-		temp = new char[strlen(buffer) + 1];
-		strcpy_s(temp, strlen(buffer) + 1, buffer);
-		delete[]buffer;
-		lent = strlen(temp) + strlen(otherclas.buffer) + 1;
-		maxcapacity = lent;
-		buffer = new char[lent];
-		strcpy_s(buffer, lent, temp);
-		strcat_s(buffer, lent, otherclas.buffer);
-		//printf("hola");
-	}
-	else{
-		strcat_s(buffer, strlen(buffer), otherclas.buffer);
-	}
-
-
-}
-
-MyString  MyString::operator+(const MyString &otherclas)
 {
-	MyString newstring;
-	int len = strlen(buffer) + strlen(otherclas.buffer) + 1;
-	maxcapacity = len;
-	newstring.buffer = new char[len];
-	strcpy_s(newstring.buffer, len, buffer);
-	strcat_s(newstring.buffer, len, otherclas.buffer);
-	return newstring;
+MaxSize = 1;
+buffer = new char[MaxSize];
+}
+MyString::MyString(const char* str)
+{
+int length = (strlen(str))+1;
+buffer = new char[length];
+MaxSize = length;
+strcpy_s(buffer, length, str);
+}
+MyString::MyString(const MyString& str)
+{
+int length = (strlen(str.buffer)+1);
+buffer = new char[length];
+MaxSize = length;
+strcpy_s(this->buffer, length, str.buffer);
+}
+unsigned int  MyString::  MyLength() const
+{
+int length = (strlen(buffer));
+return length;
+}
+const char* MyString:: c_str()const
+{
+return buffer;
+}
+bool MyString:: empty()const
+{
+return strlen(buffer) == 0;
+}
+bool MyString:: operator == (const MyString& another)const
+{
+return strcmp(buffer, another.buffer) == 0;
+}
+bool MyString:: operator == (const char* another)const
+{
+return strcmp(buffer, another) == 0;
+}
+bool MyString:: operator != (const char* another)const
+{
+return strcmp(buffer, another) != 0;
+}
+void  MyString:: operator += (const MyString& one)
+{/*
+char *temp = nullptr;
+temp = new char[strlen(buffer) + 1];
+strcpy_s(temp, strlen(buffer) + 1, buffer);
+delete[]buffer;
+int lenght = strlen(temp) + strlen(one.buffer) + 1;
+buffer = new char[lenght];
+strcpy_s(buffer, lenght, temp);
+*/
+}
+void MyString:: operator = (const MyString& one)
+{
+
+int lenght = (strlen(one.buffer)+1);
+
+if ((MaxSize < lenght)) //Revise
+{
+
+delete[]buffer;
+MaxSize = lenght;
+buffer = new char[MaxSize];
 }
 
-void  MyString::clear()
-{
-	buffer[0] = '\0';
+strcpy_s(buffer, MaxSize, one.buffer);
 }
 
-void MyString::set()
+MyString MyString:: operator + (const MyString& one)
 {
-	char otherstring[50];
-	gets_s(otherstring, 50);
-	int lent = strlen(otherstring) + 1;
-	if (maxcapacity < lent){
+MyString third;
+int lenght = strlen(buffer) + strlen(one.buffer) + 1;
+third.buffer = new char[lenght];
+strcpy_s(third.buffer, lenght, buffer);
+strcat_s(third.buffer, lenght, one.buffer);
+return third;
+}
+void MyString:: Answer(const char* string)
+{
+	
+	int length = strlen(string) + 1;
+	if (MaxSize < length){
 		delete[]buffer;
-		maxcapacity = lent;
-		buffer = new char[maxcapacity];
+		MaxSize = length;
+		buffer = new char[MaxSize];
 	}
-	strcpy_s(buffer, maxcapacity, otherstring);
+	strcpy_s(buffer, length, string);
+	
 }
-
-Vector<MyString> MyString::Tokenize(const char *parameters, char* option){
-
-	uint len = strlen(option) + 1;
-	Vector<MyString> stringvector;
-	char *finalstring, *other, *repeat;
-	finalstring = new char[len];
-	strcpy_s(finalstring, len, option);
-
-	other = strtok_s(finalstring, parameters, &repeat);
-	while (other != NULL){
-		stringvector.Push_back(other);
-		other = strtok_s(NULL, parameters, &repeat);
-	}
-	delete[] finalstring;
-	return stringvector;
-}
-void MyString:: Get(const char* string)
+MyString MyString:: operator = (const char* word)
 {
-	int len = strlen(string);
-	delete[]buffer;
-	buffer = new char[len + 1];
-	strcpy_s(buffer, len + 1, string);
+int len = strlen(word) + 1;
+buffer = new char[len];
+strcpy_s(buffer, len, word);
+return buffer;
 }
 
-MyString::~MyString(){
+Vector<MyString> MyString:: tokenize(const char* symbol, char* option)
+{
+
+char *Counter;
+char* single;
+char*temporal;
+Vector <MyString> tokens;
+unsigned int length = strlen(option) + 1;
+temporal = new char[length];
+strcpy_s(temporal, length, option);
+single = strtok_s(temporal, symbol, &Counter);
+
+while (single != NULL)
+{
+tokens.Push_back(single);
+single = strtok_s(NULL, symbol, &Counter);
+
+}
+delete[] temporal;
+return tokens;
+}
+MyString::~MyString()
+{
 	delete[] buffer;
+
 }
+

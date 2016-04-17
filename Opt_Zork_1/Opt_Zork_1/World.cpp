@@ -116,7 +116,7 @@ void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyS
 		for (int i = 0; i < MAX_ITEMS; i++)
 		{
 			
-			if (items[i]->name == words[1].C_Str())
+			if (items[i]->name == words[1].c_str())
 			{
 				
 				if (items[i]->location == player[0]->location)
@@ -147,7 +147,7 @@ void World::drop(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyS
 	for (int i = 0; i < MAX_ITEMS; i++)
 	{
 
-		if (items[i]->name == words[1].C_Str())
+		if (items[i]->name == words[1].c_str())
 		{
 			if (items[i]->inventory == true)
 			{
@@ -169,7 +169,7 @@ void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<My
 
 	for (int i = 0; i < MAX_ITEMS; i++)
 	{
-		if (items[i]->name == words[1].C_Str())
+		if (items[i]->name == words[1].c_str())
 		{
 			if (items[i]->inventory == true)
 			{
@@ -200,7 +200,7 @@ void World::unequip(const Vector <Player*>& player, Vector<Item*>&items, Vector<
 
 	for (int i = 0; i < MAX_ITEMS; i++)
 	{
-		if (items[i]->name == words[1].C_Str())
+		if (items[i]->name == words[1].c_str())
 		{
 			if (items[i]->inventory == true)
 			{
@@ -518,16 +518,16 @@ void World::movement()
 	
 	do
 	{
-		printf("You are now in %s\n", player[0]->location->name.C_Str());
+		printf("You are now in %s\n", player[0]->location->name.c_str());
 		printf("What do you want to do?\n");
 		gets_s(answer);
-		StringAnswer.Get(answer);
+		StringAnswer.Answer(answer);
 		if ((StringAnswer == "quit") && (StringAnswer == "q"))
 		{
 			break;
 		}
 		
-		tokens = TheString->Tokenize(" ", answer);
+		tokens = TheString->tokenize(" ", answer);
 		//printf("%s", tokens[1]);
 
 		//	TheString->GetWords(answer,first,second);
