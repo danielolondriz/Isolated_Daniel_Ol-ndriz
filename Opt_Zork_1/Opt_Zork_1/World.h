@@ -38,9 +38,9 @@ public:
 	void createWorld();
 	void movement();
 
-	void go(const MyString*,  Vector<Exit*>&, Player*, const dir)const;
-	void look(const char *, const Exit*, Player*, const dir)const;
-	void compare(const MyString*, const MyString*);
+	void go( const Vector<Exit*>&, Vector <Player*>&, const dir)const;
+	void look(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
+	void compare(Vector<MyString>&);
 
 
 

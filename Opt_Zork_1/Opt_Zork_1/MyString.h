@@ -60,6 +60,12 @@ public:
 		return strcmp(buffer, another) == 0;
 
 	}
+	bool operator != (const char* another)const
+	{
+
+		return strcmp(buffer, another) != 0;
+
+	}
 	/*
 	void operator += (const MyString& one)
 	{

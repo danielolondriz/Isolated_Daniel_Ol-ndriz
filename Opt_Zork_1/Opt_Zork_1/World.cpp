@@ -101,17 +101,17 @@ void World::createWorld()
 
 }
 
-void World::go(const MyString* word,  Vector<Exit*>& exit, Player* player, const dir dir)const
+void World::go( const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
 {
 	int i;
 	for (i = 0; i < 22; i++)
 	{
-		printf("%i\n", exit[i]->direction);
+		
 		if (exit[i]->direction == dir)
 		{
-			if (player->location == exit[i]->origin)
+			if (player[0]->location == exit[i]->origin)
 			{
-				player->location = exit[i]->destination;
+				player[0]->location = exit[i]->destination;
 
 				break;
 			}
@@ -119,21 +119,21 @@ void World::go(const MyString* word,  Vector<Exit*>& exit, Player* player, const
 
 
 	}
-	printf("You are now in %s\n", player->location->name.c_str());
+	printf("You are now in %s\n", player[0]->location->name.c_str());
 
 
 }
-void World::look(const char*word, const Exit* exit, Player*player, const dir dir)const
+void World::look(const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
 {
 	int i;
 	for (i = 0; i < 22; i++)
 	{
-		if (exit[i].direction == dir)
+		if (exit[i]->direction == dir)
 		{
-			if (player->location == exit[i].origin)
+			if (player[0]->location == exit[i]->origin)
 			{
 
-//				printf("You can see %s\n", exit[i].destination->description);
+				printf("%s\n", exit[i]->description);
 				break;
 			}
 		}
@@ -144,73 +144,81 @@ void World::look(const char*word, const Exit* exit, Player*player, const dir dir
 
 
 }
-void World::compare(const MyString* word1, const MyString* word2)
+void World::compare(Vector<MyString>& word)
 {
-	if (*word1 == "go")
+	unsigned int size = word.size();
+	if (size == 1)// 1 WORD
 	{
-		printf("HEEEY");/*
-		if (*word2 == "north")
+		if (word[0] == "north")
 		{
-		//go(word2->c_str, exit[0], player, north);
-
+			go(exit, player, north);
 		}
-		if (*word2 == "west")
+		if (word[0] == "west")
 		{
-		//go(word2->c_str, exit[0], player, west);
+			go(exit, player, west);
 		}
-		if (*word2 == "south")
+		if (word[0] == "south")
 		{
-		//go(word2->c_str, exit[0], player, south);
+			go(exit, player, south);
 		}
-		if (*word2 == "east")
+		if (word[0] == "east")
 		{
-		//go(word2->c_str, exit[0], player, east);
+			go(exit, player, east);
 		}
-		}
-		else if (*word1 == "look")
-
+		if (word[0] == "go")
 		{
-
-		if (*word2 == "north")
-		{
-		//look(word2->c_str, exit[0], player, north);
-
+			printf("Where?\n");
 		}
-		if (*word2 == "west")
+		if (word[0] == "look")
 		{
-		//look(word2->c_str, exit[0], player, west);
+			printf("%s\n", player[0]->location->description);
 		}
-		if (*word2 == "south")
-		{
-		//look(word2->c_str, exit[0], player, south);
-		}
-		if (*word2 == "east")
-		{
-		//look(word2->c_str, exit[0], player, east);
-		}
-		}
-		else if (word2 == nullptr)
-		{
-		*/
 	}
-	printf("POLLA%i\n", exit[5]->direction);
-		if (*word1 == "north")
+	if (size == 2)//2 WORDS
+	{
+
+		if (word[0] == "go")
 		{
-		go(word1, exit, player[0], north);
-		
+			
+			if (word[1] == "north")
+			{
+				go(exit, player, north);
+			}
+			if (word[1] == "west")
+			{
+				go(exit, player, west);
+			}
+			if (word[1] == "south")
+			{
+				go(exit, player, south);
+			}
+			if (word[1] == "east")
+			{
+				go(exit, player, east);
+			}
 		}
-		if (*word1 == "west")
+		if (word[0] == "look")
 		{
-		go(word1, exit, player[0], west);
+			
+			if (word[1] == "north")
+			{
+				look(exit, player, north);
+			}
+			if (word[1] == "west")
+			{
+				look(exit, player, west);
+			}
+			if (word[1] == "south")
+			{
+				look(exit, player, south);
+			}
+			if (word[1] == "east")
+			{
+				look(exit, player, east);
+			}
 		}
-		if (*word1 == "south")
-		{
-		go(word1, exit, player[0], south);
-		}
-		if (*word1 == "east")
-		{
-		go(word1, exit, player[0], east);
-		}
+	}
+
 
 		}
 	
@@ -221,22 +229,32 @@ void World::compare(const MyString* word1, const MyString* word2)
 void World::movement()
 {
 	Vector <MyString> tokens;
+	MyString StringAnswer;
+	
 	char answer [20];
+	char* quit = "quit";
 	char *Counter;
 	//rooms[4]->name;
 	player[0]->location = rooms[0];
 	printf("You are now in %s\n", player[0]->location->name.c_str());
 	
+	do
+	{
 		printf("What do you want to do?\n");
 		gets_s(answer);
-		//TheString->Get(answer);
+		StringAnswer.Get(answer);
+		if (StringAnswer != "quit")
+		{
+			//break; //breaks the loop so that it doesn't do all the other functions & methods
+		}
+		
 		tokens = TheString->tokenize(" ", answer);
-		printf("%s", tokens[1]);
+		//printf("%s", tokens[1]);
 
-	//	TheString->GetWords(answer,first,second);
+		//	TheString->GetWords(answer,first,second);
 		//printf("%s", first->c_str());
-		//compare(TheString,nullptr);
-
+		compare(tokens);
+	} while (StringAnswer != "quit");
 
 
 
