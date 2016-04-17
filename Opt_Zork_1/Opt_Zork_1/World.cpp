@@ -1,7 +1,8 @@
 #include "World.h"
 #include<stdio.h>
 #define MAX_ITEMS 4
-
+#define MAX_INVENTORY 3
+#define MAX_EQUIPPED 2
 World::World(){
 	createWorld();
 	TheString = new MyString();
@@ -108,7 +109,7 @@ void World::createWorld()
 	
 
 }
-void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
 {
 	
 		
@@ -122,8 +123,16 @@ void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyS
 				{
 					if (items[i]->inventory == false)
 					{
-						items[i]->inventory = true;
-						printf("\n\nyou've picked the %s!\n\n",items[i]->name);
+						if (capacity < MAX_INVENTORY)
+						{
+							items[i]->inventory = true;
+							printf("\n\nyou've picked the %s!\n\n", items[i]->name);
+							capacity++;
+						}
+						else
+						{
+							printf("\n\nthere is no room in your pockets!\n\n");
+						}
 					}
 				}
 			}
@@ -131,7 +140,7 @@ void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyS
 		}
 	
 }
-void World::drop(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+void World::drop(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
 {
 
 
@@ -147,13 +156,14 @@ void World::drop(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyS
 				items[i]->equip = false;
 				items[i]->location = player[0]->location;
 				printf("\n\nYou've dropped the %s!\n\n", items[i]->name);
+				capacity--;
 			}
 		}
 
 	}
 
 }
-void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
 {
 
 
@@ -165,8 +175,17 @@ void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<My
 			{
 				if (items[i]->equip == false)
 				{
-					items[i]->equip = true;
-					printf("\n\nYou've equipped the %s!\n\n", items[i]->name);
+					if (capacity < MAX_EQUIPPED)
+					{
+						items[i]->equip = true;
+						printf("\n\nYou've equipped the %s!\n\n", items[i]->name);
+						capacity++;
+					}
+					else
+					{
+						printf("You have your hands full!\n\n");
+					}
+					
 				}
 			}
 		}
@@ -175,7 +194,7 @@ void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<My
 	}
 
 }
-void World::unequip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words)const
+void World::unequip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
 {
 
 
@@ -189,6 +208,7 @@ void World::unequip(const Vector <Player*>& player, Vector<Item*>&items, Vector<
 				{
 					items[i]->equip = false;
 					printf("\n\nYou've unequipped the %s!\n\n", items[i]->name);
+					capacity--;
 				}
 			}
 		}
@@ -315,8 +335,9 @@ void World::inventory(Vector<Item*>& items)
 		printf("Nothing\n\n");
 	}
 }
-void World::compare(Vector<MyString>& word)
+void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& INVsize )
 {
+	
 	unsigned int size = word.size();
 	if (size == 1)// 1 WORD
 	{
@@ -442,7 +463,7 @@ void World::compare(Vector<MyString>& word)
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
 			{
-				take(player, items, word);
+				take(player, items, word,INVsize);
 			}
 			
 		}
@@ -450,7 +471,7 @@ void World::compare(Vector<MyString>& word)
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
 			{
-				drop(player, items, word);
+				drop(player, items, word,INVsize);
 			}
 
 		}
@@ -458,7 +479,7 @@ void World::compare(Vector<MyString>& word)
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
 			{
-				equip(player, items, word);
+				equip(player, items, word,EQsize);
 			}
 
 		}
@@ -466,7 +487,7 @@ void World::compare(Vector<MyString>& word)
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
 			{
-				unequip(player, items, word);
+				unequip(player, items, word,EQsize);
 			}
 
 		}
@@ -483,6 +504,8 @@ void World::compare(Vector<MyString>& word)
 
 void World::movement()
 {
+	unsigned int INVsize = 0;
+	unsigned int EQsize = 0;
 	Vector <MyString> tokens;
 	MyString StringAnswer;
 	
@@ -509,7 +532,7 @@ void World::movement()
 
 		//	TheString->GetWords(answer,first,second);
 		//printf("%s", first->c_str());
-		compare(tokens);
+		compare(tokens,EQsize,INVsize);
 	} while ((StringAnswer != "quit")&& (StringAnswer != "q"));
 
 
