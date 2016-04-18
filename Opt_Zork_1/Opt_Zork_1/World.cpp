@@ -1,5 +1,6 @@
 #include "World.h"
 #include<stdio.h>
+#include<stdlib.h>
 #define MAX_ITEMS 5
 #define MAX_INVENTORY 3
 #define MAX_EQUIPPED 2
@@ -565,6 +566,15 @@ void World::compare(Vector<MyString>& word, unsigned int& EQsize, unsigned int& 
 			return;
 
 		}
+		if (word[0] == "help" || word[0] == "h")
+		{
+			printf("use n/s/w/e or north /south /west /east or go north/... to move\n");
+			printf("use open + direction (north /south /west /east) to open a door and close to close it \n");
+			printf("use pick / drop to take/drop items from your inventory \n");
+			printf("use equip /unequip + object to equip it (Remember you only have 2 hands!) \n");
+			printf("use put/get item into/from item to put or get items from a container \n\n\n\n");
+			return;
+		}
 	}
 	if (size == 2)//2 WORDS
 	{
@@ -815,12 +825,14 @@ void World::movement()
 
 			//	TheString->GetWords(answer,first,second);
 			//printf("%s", first->c_str());
+			
 			compare(tokens, EQsize, INVsize,BOXsize);
 			if (items[4]->inventory == true || items[4]->equip == true)
 			{
 				items[4]->location = player[0]->location;
 			}
-			
+			system("pause");
+			system("cls");
 			printf("You are now in %s\n\n", player[0]->location->name.c_str());
 			printItems();
 			printf("What do you want to do?\n");
