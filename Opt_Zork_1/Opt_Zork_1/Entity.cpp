@@ -7,4 +7,5 @@ Entity::Entity(const char* names, const char* descriptions)
 Entity::~Entity()
 {
 	
+
 }

@@ -28,7 +28,7 @@ public:
 	MyString operator = (const char* word);
 	Vector<MyString> tokenize(const char* symbol, char* option);
 	~MyString();
-
+	
 };
 
 #endif

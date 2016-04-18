@@ -1,5 +1,6 @@
 #include"MyString.h"
 
+
 MyString::MyString()
 
 {
@@ -103,11 +104,11 @@ return buffer;
 
 Vector<MyString> MyString:: tokenize(const char* symbol, char* option)
 {
-
+	
 char *Counter;
 char* single;
 char*temporal;
-Vector <MyString> tokens;
+Vector <MyString> tokensi;
 unsigned int length = strlen(option) + 1;
 temporal = new char[length];
 strcpy_s(temporal, length, option);
@@ -115,12 +116,14 @@ single = strtok_s(temporal, symbol, &Counter);
 
 while (single != NULL)
 {
-tokens.Push_back(single);
+tokensi.Push_back(single);
 single = strtok_s(NULL, symbol, &Counter);
 
 }
 delete[] temporal;
-return tokens;
+
+return tokensi;
+
 }
 
 MyString::~MyString()

@@ -39,6 +39,7 @@ public:
 	void unequip( Vector<MyString>&, unsigned int&)const;
 	void put(Vector<MyString>&, unsigned int&, unsigned int&);
 	void get(Vector<MyString>&, unsigned int&, unsigned int&);
+	void printItems();
 	void ligth();
 	void unligth();
 	void travel();
