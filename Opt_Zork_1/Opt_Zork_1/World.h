@@ -39,7 +39,7 @@ public:
 	void unequip(const Vector <Player*>&, Vector<Item*>&, Vector<MyString>&, unsigned int&)const;
 	void ligth(const Vector < Room*>&);
 	void unligth(const Vector < Room*>&);
-	void travel(Vector <Player*>&, const Vector <Room*>&, Vector<Item*>&);
+	void travel();
 	void inventory(Vector<Item*>&);
 	void compare(Vector<MyString>&,unsigned int&, unsigned int&);
 

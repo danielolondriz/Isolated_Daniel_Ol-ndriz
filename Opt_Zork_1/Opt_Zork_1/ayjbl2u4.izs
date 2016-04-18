@@ -115,10 +115,10 @@ void World::travel()
 {
 	if (player[0]->location == rooms[10] )
 	{
-		
+		printf("%s", items[2]->name);
 		if (items[2]->inventory == true)
 		{
-			
+			printf("POLA");
 			player[0]->location = rooms[11];
 		}
 	}
@@ -126,7 +126,7 @@ void World::travel()
 	{
 		if (items[2]->inventory == true)
 		{
-			
+			printf("POLLA");
 			player[0]->location = rooms[10];
 		}
 	}

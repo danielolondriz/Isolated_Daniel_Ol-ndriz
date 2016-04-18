@@ -87,7 +87,7 @@ public:
 	}
 	~Vector()
 	{
-		
+		delete[]buffer;
 	}
 	//empty();
 	//clean();
