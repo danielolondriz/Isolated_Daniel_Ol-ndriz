@@ -36,13 +36,13 @@ public:
 
 	void Push_back(const TYPE& vector)
 	{
-
+		
 		TYPE* temp = nullptr;
 		if (num_elements == capacity)
 		{
 			capacity *= 2;
 			temp = new TYPE[capacity];
-			for (int i = 0; i < capacity; i++)
+			for (int i = 0; i < num_elements; i++)
 			{
 				*(temp + i) = *(buffer + i);
 			}

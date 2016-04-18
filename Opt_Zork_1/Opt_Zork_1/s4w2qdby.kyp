@@ -61,7 +61,7 @@ void World::createWorld()
 
 	items.Push_back(new Item("knife", "This is a Knife", RollerCoaster, false, false, false, false));
 
-	items.Push_back(new Item("box", "This is a Box", HauntedHouse, false, false,true,false));
+	items.Push_back(new Item("Box", "This is a Box", RollerCoaster, false, false,true,false));
 	//EXITS
 	//Exit* exit[22];
 	exit.Push_back(new Exit(EntrancePlaza, MainStreet, north, false,"main street","you see the Main street"));
@@ -496,7 +496,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		}
 		if (word[0] == "take")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
 			{
 				take(player, items, word,INVsize);
 			}
@@ -505,7 +505,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		}
 		if (word[0] == "drop")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight"))
 			{
 				drop(player, items, word,INVsize);
 			}
@@ -513,7 +513,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		}
 		if (word[0] == "equip")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "box"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket"))
 			{
 				equip(player, items, word,EQsize);
 			}
@@ -527,7 +527,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		}
 		if (word[0] == "unequip")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "box"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket"))
 			{
 				unequip(player, items, word,EQsize);
 			}
@@ -557,7 +557,7 @@ void World::movement()
 	Vector <MyString> tokens;
 	MyString StringAnswer;
 	
-	char answer [50];
+	char answer [20];
 	char* quit = "quit";
 	char *Counter;
 	//rooms[4]->name;
