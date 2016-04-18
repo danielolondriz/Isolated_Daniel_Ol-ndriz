@@ -35,13 +35,15 @@ public:
 	void close( const dir)const;
 	void take(  Vector<MyString>&, unsigned int&)const;
 	void drop(Vector<MyString>&, unsigned int&)const;
-	void equip(const Vector <Player*>&, Vector<Item*>&, Vector<MyString>&, unsigned int&)const;
-	void unequip(const Vector <Player*>&, Vector<Item*>&, Vector<MyString>&, unsigned int&)const;
-	void ligth(const Vector < Room*>&);
-	void unligth(const Vector < Room*>&);
+	void equip( Vector<MyString>&, unsigned int&)const;
+	void unequip( Vector<MyString>&, unsigned int&)const;
+	void put(Vector<MyString>&, unsigned int&, unsigned int&);
+	void get(Vector<MyString>&, unsigned int&, unsigned int&);
+	void ligth();
+	void unligth();
 	void travel();
 	void inventory(Vector<Item*>&);
-	void compare(Vector<MyString>&,unsigned int&, unsigned int&);
+	void compare(Vector<MyString>&, unsigned int&, unsigned int&, unsigned int&);
 
 
 

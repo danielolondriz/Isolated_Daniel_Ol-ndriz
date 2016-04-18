@@ -3,6 +3,7 @@
 #define MAX_ITEMS 5
 #define MAX_INVENTORY 3
 #define MAX_EQUIPPED 2
+#define MAX_BOX 2
 World::World(){
 	createWorld();
 	TheString = new MyString();
@@ -186,7 +187,7 @@ void World::drop( Vector<MyString>& words, unsigned int& capacity)const
 	}
 
 }
-void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
+void World::equip( Vector<MyString>& words, unsigned int& capacity)const
 {
 
 
@@ -217,7 +218,7 @@ void World::equip(const Vector <Player*>& player, Vector<Item*>&items, Vector<My
 	}
 
 }
-void World::unequip(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
+void World::unequip( Vector<MyString>& words, unsigned int& capacity)const
 {
 
 
@@ -383,53 +384,111 @@ void World::inventory(Vector<Item*>& items)
 		printf("Nothing\n\n");
 	}
 }
-void World::ligth(const Vector < Room*>& room)
+void World::ligth()
 {
 	for (int i = 0; i < 12; i++)
 	{
-		if (room[i]->light == true)
+		if (rooms[i]->light == true)
 		{
-			if (room[i]->lightopen == false)
+			if (rooms[i]->lightopen == false)
 			{
-				room[i]->lightopen = true;
+				rooms[i]->lightopen = true;
 			}
 		}
 	}
 }
-void World::unligth(const Vector < Room*>& room)
+void World::unligth()
 {
 	for (int i = 0; i < 12; i++)
 	{
-		if (room[i]->light == true)
+		if (rooms[i]->light == true)
 		{
-			if (room[i]->lightopen == true)
+			if (rooms[i]->lightopen == true)
 			{
-				room[i]->lightopen = false;
+				rooms[i]->lightopen = false;
 			}
 		}
 	}
 }
-void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& INVsize )
+void World::put(Vector<MyString>& word, unsigned int& MAX, unsigned int& box)
 {
+	if (player[0]->location == items[4]->location)
+	{
+		for (int i = 0; i < MAX_ITEMS; i++)
+		{
+			if (word[1] == items[i]->name)
+			{
+				if (items[i]->inventory == true)
+				{
+					if (items[i]->IsBox == false)
+					{
+						if (box < MAX_BOX)
+						{
+							items[i]->InBox = true;
+							items[i]->inventory = false;
+							printf("you've put %s into the bag\n", items[i]->name);
+							MAX--;
+							box++;
+						}
+						else
+						{
+							printf("there is no room in the box\n");
+						}
+					}
+				}
+			}
+		}
+	}
 	
+}
+void World::get(Vector<MyString>& word, unsigned int& MAX, unsigned int& box)
+{
+	if (player[0]->location == items[4]->location)
+	{
+		for (int i = 0; i < MAX_ITEMS; i++)
+		{
+			if (word[1] == items[i]->name)
+			{
+				if (items[i]->inventory == false)
+				{
+					if (items[i]->InBox == true)
+					{
+						if (MAX < MAX_INVENTORY)
+						{
+							items[i]->InBox = false;
+							items[i]->inventory = true;
+							printf("you've got the  %s from bag\n", items[i]->name);
+							MAX++;
+							box--;
+						}
+
+					}
+				}
+			}
+		}
+	}
+}
+void World::compare(Vector<MyString>& word, unsigned int& EQsize, unsigned int& INVsize, unsigned int& BOXsize)
+{
+
 	unsigned int size = word.size();
 	if (size == 1)// 1 WORD
 	{
 		if (word[0] == "north" || word[0] == "n")
 		{
-			go( north);
+			go(north);
 		}
 		if (word[0] == "west" || word[0] == "w")
 		{
-			go( west);
+			go(west);
 		}
 		if (word[0] == "south" || word[0] == "s")
 		{
-			go( south);
+			go(south);
 		}
 		if (word[0] == "east" || word[0] == "e")
 		{
-			go( east);
+			go(east);
 		}
 		if (word[0] == "go")
 		{
@@ -443,11 +502,11 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		{
 			printf("Which direction do you want to open?\n");
 		}
-		if (word[0] == "inventory" || word[0] == "i" ||word[0] == "inv")
+		if (word[0] == "inventory" || word[0] == "i" || word[0] == "inv")
 		{
 			printf("You have:\n");
 			inventory(items);
-			
+
 		}
 	}
 	if (size == 2)//2 WORDS
@@ -455,34 +514,34 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 
 		if (word[0] == "go")
 		{
-			
+
 			if (word[1] == "north")
 			{
-				go( north);
+				go(north);
 			}
 			if (word[1] == "west")
 			{
-				go( west);
+				go(west);
 			}
 			if (word[1] == "south")
 			{
-				go( south);
+				go(south);
 			}
 			if (word[1] == "east")
 			{
-				go( east);
+				go(east);
 			}
 		}
 		if (word[0] == "look")
 		{
-			
+
 			if (word[1] == "north")
 			{
-				look( north);
+				look(north);
 			}
 			if (word[1] == "west")
 			{
-				look( west);
+				look(west);
 			}
 			if (word[1] == "south")
 			{
@@ -490,11 +549,11 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 			}
 			if (word[1] == "east")
 			{
-				look( east);
+				look(east);
 			}
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
 			{
-				lookItem( word);
+				lookItem(word);
 			}
 		}
 		if (word[0] == "open")
@@ -502,19 +561,19 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 
 			if (word[1] == "north")
 			{
-				open( north);
+				open(north);
 			}
 			if (word[1] == "west")
 			{
-				open( west);
+				open(west);
 			}
 			if (word[1] == "south")
 			{
-				open( south);
+				open(south);
 			}
 			if (word[1] == "east")
 			{
-				open( east);
+				open(east);
 			}
 		}
 		if (word[0] == "close")
@@ -522,19 +581,19 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 
 			if (word[1] == "north")
 			{
-				close( north);
+				close(north);
 			}
 			if (word[1] == "west")
 			{
-				close( west);
+				close(west);
 			}
 			if (word[1] == "south")
 			{
-				close( south);
+				close(south);
 			}
 			if (word[1] == "east")
 			{
-				close( east);
+				close(east);
 			}
 		}
 		if (word[0] == "use")
@@ -546,18 +605,18 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		}
 		if (word[0] == "pick")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "bag"))
 			{
-				take( word,INVsize);
+				take(word, INVsize);
 			}
-			
-			
+
+
 		}
 		if (word[0] == "drop")
 		{
-			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "bag"))
 			{
-				drop( word,INVsize);
+				drop(word, INVsize);
 			}
 
 		}
@@ -565,32 +624,61 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "box"))
 			{
-				equip(player, items, word,EQsize);
+				equip(word, EQsize);
 			}
 			if ((word[1] == "flashlight"))
 			{
-				equip(player, items, word, EQsize);
-				ligth(rooms);
+				equip(word, EQsize);
+				ligth();
 			}
-			}
-
 		}
+
 		if (word[0] == "unequip")
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "box"))
 			{
-				unequip(player, items, word,EQsize);
+				unequip(word, EQsize);
 			}
 			if ((word[1] == "flashlight"))
 			{
-				unequip(player, items, word, EQsize);
-				unligth(rooms);
+				unequip(word, EQsize);
+				unligth();
 			}
 
 		}
-		
-			
+
+
+	}
+	if (size == 4)
+	{
+		if (word[0] == "put")
+		{
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
+			{
+				if (word[2] == "into")
+				{
+					if (word[3] == "bag")
+					{
+						put(word, INVsize, BOXsize);
+					}
+				}
+			}
 		}
+		if (word[0] == "get")
+		{
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
+			{
+				if (word[2] == "from")
+				{
+					if (word[3] == "bag")
+					{
+						get(word, INVsize, BOXsize);
+					}
+				}
+			}
+		}
+	}
+}
 	
 
 
@@ -604,6 +692,7 @@ void World::movement()
 {
 	unsigned int INVsize = 0;
 	unsigned int EQsize = 0;
+	unsigned int BOXsize = 0;
 	Vector <MyString> tokens;
 	MyString StringAnswer;
 	
@@ -637,7 +726,7 @@ void World::movement()
 
 			//	TheString->GetWords(answer,first,second);
 			//printf("%s", first->c_str());
-			compare(tokens, EQsize, INVsize);
+			compare(tokens, EQsize, INVsize,BOXsize);
 
 			printf("You are now in %s\n", player[0]->location->name.c_str());
 			printf("What do you want to do?\n");
