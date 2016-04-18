@@ -4,10 +4,14 @@ ZORK 2 NOTES
 Althoug a commit was made by the User Vulpem, it was me, from a computer of the Univerity that had another name logged in
 
 5 items can be found in this game: two in the shop, the bag in the Haunted House, the crowbar in the ferris wheel, and the knife in the roller coaster.
+
+
 SPECIAL FEATURES 
+
 We commented that this game special features would be using a flashlight to get it some rooms, and the abilty to travel through train stations if the player owns a ticket.
 
 ZORK 1 NOTES
+
 NOTE: "Restructuration of code" and "Big changes: All iterations added" commits were made a day before, so they should be between "almost all instructions done" and "updated readme" commits in the timeline.
 
 NOTE: The door is located in the Shop.
