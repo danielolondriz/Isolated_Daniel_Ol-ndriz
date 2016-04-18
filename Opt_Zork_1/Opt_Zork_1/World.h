@@ -30,6 +30,7 @@ public:
 
 	void go( const Vector<Exit*>&, Vector <Player*>&, const dir)const;
 	void look(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
+	void lookItem(Vector<Item*>&, Vector<MyString>&);
 	void open(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
 	void close(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
 	void take( const Vector <Player*>&,Vector<Item*>& , Vector<MyString>&, unsigned int&)const;

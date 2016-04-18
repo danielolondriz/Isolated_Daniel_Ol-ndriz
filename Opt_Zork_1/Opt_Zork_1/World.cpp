@@ -61,7 +61,7 @@ void World::createWorld()
 
 	items.Push_back(new Item("knife", "This is a Knife", RollerCoaster, false, false, false, false));
 
-	items.Push_back(new Item("box", "This is a Box", HauntedHouse, false, false,true,false));
+	items.Push_back(new Item("bag", "This is a bag", HauntedHouse, false, false,true,false));
 	//EXITS
 	//Exit* exit[22];
 	exit.Push_back(new Exit(EntrancePlaza, MainStreet, north, false,"main street","you see the Main street"));
@@ -273,6 +273,26 @@ void World::look(const Vector<Exit*>& exit, Vector <Player*>& player, const dir 
 		}
 	}
 }
+void World::lookItem(Vector<Item*>& items, Vector<MyString>& word)
+{
+	for (int i = 0; i < MAX_ITEMS; i++)
+	{
+		if (items[i]->name == word[1].c_str())
+		{
+			if (items[i]->inventory == true)
+			{
+				if (items[i]->equip == true)
+				{
+					printf("\nyou have  %s equiped\n", items[i]->name);
+				}
+				else
+				{
+					printf("\nYou have  %s in your inventory!\n", items[i]->name);
+				}
+			}
+		}
+	}
+}
 
 void World::open(const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
 {
@@ -452,6 +472,10 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 			if (word[1] == "east")
 			{
 				look(exit, player, east);
+			}
+			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
+			{
+				lookItem(items, word);
 			}
 		}
 		if (word[0] == "open")
