@@ -402,7 +402,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		{
 			printf("Which direction do you want to open?\n");
 		}
-		if (word[0] == "inventory" || word[0] == "i")
+		if (word[0] == "inventory" || word[0] == "i" ||word[0] == "inv")
 		{
 			printf("You have:\n");
 			inventory(items);
@@ -536,6 +536,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 			}
 
 		}
+		
 			
 		}
 	
@@ -561,24 +562,39 @@ void World::movement()
 	player[0]->location = rooms[0];
 	
 	
-	do
-	{
 		printf("You are now in %s\n", player[0]->location->name.c_str());
 		printf("What do you want to do?\n");
-		gets_s(answer);
-		StringAnswer.Answer(answer);
-		if ((StringAnswer == "quit") && (StringAnswer == "q"))
+		do
 		{
-			break;
+			do
+			{
+				gets_s(answer);
+				
+			} while (answer[0]==NULL);
+				StringAnswer.Answer(answer);
+			
+		} while (StringAnswer.empty());
+		
+		
+		while ((StringAnswer != "quit") && (StringAnswer != "q"))
+		{
+			
+			
+
+			tokens = TheString->tokenize(" ", answer);
+			//printf("%s", tokens[1]);
+
+			//	TheString->GetWords(answer,first,second);
+			//printf("%s", first->c_str());
+			compare(tokens, EQsize, INVsize);
+
+			printf("You are now in %s\n", player[0]->location->name.c_str());
+			printf("What do you want to do?\n");
+			gets_s(answer);
+			StringAnswer.Answer(answer);
 		}
 		
-		tokens = TheString->tokenize(" ", answer);
-		//printf("%s", tokens[1]);
 
-		//	TheString->GetWords(answer,first,second);
-		//printf("%s", first->c_str());
-		compare(tokens,EQsize,INVsize);
-	} while ((StringAnswer != "quit")&& (StringAnswer != "q"));
 
 
 

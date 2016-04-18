@@ -31,7 +31,7 @@ return buffer;
 }
 bool MyString:: empty()const
 {
-return strlen(buffer) == 0;
+return strlen(buffer)==0;
 }
 bool MyString:: operator == (const MyString& another)const
 {
@@ -122,6 +122,7 @@ single = strtok_s(NULL, symbol, &Counter);
 delete[] temporal;
 return tokens;
 }
+
 MyString::~MyString()
 {
 	delete[] buffer;
