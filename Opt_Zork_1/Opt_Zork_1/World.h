@@ -28,17 +28,18 @@ public:
 	void createWorld();
 	void movement();
 
-	void go( const Vector<Exit*>&, Vector <Player*>&, const dir)const;
-	void look(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
-	void lookItem(Vector<Item*>&, Vector<MyString>&);
-	void open(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
-	void close(const Vector<Exit*>&, Vector <Player*>&, const dir)const;
-	void take( const Vector <Player*>&,Vector<Item*>& , Vector<MyString>&, unsigned int&)const;
-	void drop(const Vector <Player*>&, Vector<Item*>&, Vector<MyString>&, unsigned int&)const;
+	void go (const dir)const;
+	void look( const dir)const;
+	void lookItem( Vector<MyString>&);
+	void open( const dir)const;
+	void close( const dir)const;
+	void take(  Vector<MyString>&, unsigned int&)const;
+	void drop(Vector<MyString>&, unsigned int&)const;
 	void equip(const Vector <Player*>&, Vector<Item*>&, Vector<MyString>&, unsigned int&)const;
 	void unequip(const Vector <Player*>&, Vector<Item*>&, Vector<MyString>&, unsigned int&)const;
 	void ligth(const Vector < Room*>&);
 	void unligth(const Vector < Room*>&);
+	void travel(Vector <Player*>&, const Vector <Room*>&, Vector<Item*>&);
 	void inventory(Vector<Item*>&);
 	void compare(Vector<MyString>&,unsigned int&, unsigned int&);
 

@@ -111,7 +111,7 @@ void World::createWorld()
 	
 
 }
-void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
+void World::take( Vector<MyString>& words, unsigned int& capacity)const
 {
 	
 		
@@ -142,10 +142,10 @@ void World::take(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyS
 		}
 	
 }
-void World::drop(const Vector <Player*>& player, Vector<Item*>&items, Vector<MyString>& words, unsigned int& capacity)const
+void World::drop( Vector<MyString>& words, unsigned int& capacity)const
 {
 
-
+	
 	for (int i = 0; i < MAX_ITEMS; i++)
 	{
 
@@ -220,7 +220,7 @@ void World::unequip(const Vector <Player*>& player, Vector<Item*>&items, Vector<
 
 }
 
-void World::go( const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
+void World::go(  const dir dir)const
 {
 	int i;
 	for (i = 0; i < 22; i++)
@@ -257,7 +257,7 @@ void World::go( const Vector<Exit*>& exit, Vector <Player*>& player, const dir d
 
 
 }
-void World::look(const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
+void World::look( const dir dir)const
 {
 	int i;
 	for (i = 0; i < 22; i++)
@@ -273,7 +273,7 @@ void World::look(const Vector<Exit*>& exit, Vector <Player*>& player, const dir 
 		}
 	}
 }
-void World::lookItem(Vector<Item*>& items, Vector<MyString>& word)
+void World::lookItem( Vector<MyString>& word)
 {
 	for (int i = 0; i < MAX_ITEMS; i++)
 	{
@@ -294,7 +294,7 @@ void World::lookItem(Vector<Item*>& items, Vector<MyString>& word)
 	}
 }
 
-void World::open(const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
+void World::open( const dir dir)const
 {
 	int i;
 	for (i = 0; i < 22; i++)
@@ -324,25 +324,23 @@ void World::open(const Vector<Exit*>& exit, Vector <Player*>& player, const dir 
 		
 	}
 }
-void World::close(const Vector<Exit*>& exit, Vector <Player*>& player, const dir dir)const
+void World::close( const dir dir)const
 {
 	int i;
 	
 	//for (i = 0; i < 22; i++)
 	{
-		if (player[0]->location->name == exit[3]->origin->name || (player[0]->location == exit[20]->origin))
+		if (player[0]->location->name == exit[4]->origin->name || (player[0]->location == exit[20]->origin))
 		{
 			
-			if (exit[3]->Door == false)
+			if (exit[4]->Door == false && exit[20]->Door == false)
 			{
-				exit[3]->Door = true;
+				exit[4]->Door = true;
+				exit[20]->Door = true;
+			
 				printf("Door has closed\n");
 			}
-			if (exit[20]->Door == false)
-			{
-				exit[20]->Door = true;
-				//printf("Door has closed!!\n");
-			}
+			
 		}
 		
 		
@@ -398,19 +396,19 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 	{
 		if (word[0] == "north" || word[0] == "n")
 		{
-			go(exit, player, north);
+			go( north);
 		}
 		if (word[0] == "west" || word[0] == "w")
 		{
-			go(exit, player, west);
+			go( west);
 		}
 		if (word[0] == "south" || word[0] == "s")
 		{
-			go(exit, player, south);
+			go( south);
 		}
 		if (word[0] == "east" || word[0] == "e")
 		{
-			go(exit, player, east);
+			go( east);
 		}
 		if (word[0] == "go")
 		{
@@ -439,19 +437,19 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 			
 			if (word[1] == "north")
 			{
-				go(exit, player, north);
+				go( north);
 			}
 			if (word[1] == "west")
 			{
-				go(exit, player, west);
+				go( west);
 			}
 			if (word[1] == "south")
 			{
-				go(exit, player, south);
+				go( south);
 			}
 			if (word[1] == "east")
 			{
-				go(exit, player, east);
+				go( east);
 			}
 		}
 		if (word[0] == "look")
@@ -459,23 +457,23 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 			
 			if (word[1] == "north")
 			{
-				look(exit, player, north);
+				look( north);
 			}
 			if (word[1] == "west")
 			{
-				look(exit, player, west);
+				look( west);
 			}
 			if (word[1] == "south")
 			{
-				look(exit, player, south);
+				look(south);
 			}
 			if (word[1] == "east")
 			{
-				look(exit, player, east);
+				look( east);
 			}
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
 			{
-				lookItem(items, word);
+				lookItem( word);
 			}
 		}
 		if (word[0] == "open")
@@ -483,19 +481,19 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 
 			if (word[1] == "north")
 			{
-				open(exit, player, north);
+				open( north);
 			}
 			if (word[1] == "west")
 			{
-				open(exit, player, west);
+				open( west);
 			}
 			if (word[1] == "south")
 			{
-				open(exit, player, south);
+				open( south);
 			}
 			if (word[1] == "east")
 			{
-				open(exit, player, east);
+				open( east);
 			}
 		}
 		if (word[0] == "close")
@@ -503,26 +501,26 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 
 			if (word[1] == "north")
 			{
-				close(exit, player, north);
+				close( north);
 			}
 			if (word[1] == "west")
 			{
-				close(exit, player, west);
+				close( west);
 			}
 			if (word[1] == "south")
 			{
-				close(exit, player, south);
+				close( south);
 			}
 			if (word[1] == "east")
 			{
-				close(exit, player, east);
+				close( east);
 			}
 		}
-		if (word[0] == "take")
+		if (word[0] == "pick")
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
 			{
-				take(player, items, word,INVsize);
+				take( word,INVsize);
 			}
 			
 			
@@ -531,7 +529,7 @@ void World::compare(Vector<MyString>& word,unsigned int& EQsize, unsigned int& I
 		{
 			if ((word[1] == "knife") || (word[1] == "crowbar") || (word[1] == "ticket") || (word[1] == "flashlight") || (word[1] == "box"))
 			{
-				drop(player, items, word,INVsize);
+				drop( word,INVsize);
 			}
 
 		}

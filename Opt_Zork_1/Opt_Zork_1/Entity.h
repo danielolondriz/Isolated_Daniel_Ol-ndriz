@@ -8,6 +8,6 @@ public:
 	MyString description;
 public:
 	Entity(const char*, const char*);
-	~Entity();
+	virtual ~Entity();
 };
 #endif
