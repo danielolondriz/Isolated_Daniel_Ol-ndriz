@@ -108,7 +108,8 @@ void World::CreateWorld()
 }
 void World::movement()
 {
-	((Creature*)entities[0])->Update();
+	
+	
 	char command[COMMANDBUFFER];
 	bool firsttimeinloop = true;
 	unsigned int currenttime = 0;
@@ -123,12 +124,19 @@ void World::movement()
 		if (currenttime >= (initialtime + DELAY)){
 			//printf("Hy.\n");
 			initialtime = currenttime;
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Update();
+			}
 			
 		}
 
 		//kbhit test
 		if (_kbhit())
 		{
+		//	for (int i = 0; i < entities.size(); i++)
+			////entities[i]->Update();
+			//}
 			if (charcommandnum < (COMMANDBUFFER - 2)){
 				command[charcommandnum] = _getch();
 				if (command == "q\0")
@@ -136,8 +144,8 @@ void World::movement()
 					break;
 				}
 				command[charcommandnum + 1] = '\0';
-				printf("String: %s\n", command);//prints command
-				//system("cls");
+				//printf("String: %s\n", command);//prints command
+				system("cls");
 				charcommandnum++;
 				if (command[charcommandnum - 1] == '\r'){//prints full comand
 					printf("Your command is: %s\n", command);

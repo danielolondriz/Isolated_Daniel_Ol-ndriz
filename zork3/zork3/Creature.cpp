@@ -13,21 +13,5 @@ Creature::~Creature()
 {};
 void Creature::Update()
 {
-	char command[COMMANDBUFFER];
-	bool firsttimeinloop = true;
-	unsigned int currenttime = 0;
-	unsigned int initialtime = 0;
-	unsigned int charcommandnum = 0;
-	//timeGetTime()
-	initialtime = GetTickCount();
-
-	while (command != "q\0"){
-		//Executa el codi cada x milisegons (DELAY)
-		currenttime = GetTickCount();
-		if (currenttime >= (initialtime + DELAY)){
-			printf("Hy.\n");
-			initialtime = currenttime;
-
-		}
-	}
+	printf("Hy.\n");
 }
