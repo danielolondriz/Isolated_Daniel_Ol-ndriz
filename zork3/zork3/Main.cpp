@@ -6,7 +6,7 @@
 int main()
 {
 	World world;
-	world.CreateWorld();
+	//world.CreateWorld();
 	world.movement();
 	return 0;
 }
