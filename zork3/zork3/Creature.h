@@ -6,5 +6,5 @@ public:
 public:
 	Creature(const char* , const char* , Room*, uint, ObjectType);
 	~Creature();
-	void Update();
+	
 };

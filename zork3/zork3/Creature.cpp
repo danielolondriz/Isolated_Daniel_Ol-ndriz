@@ -11,7 +11,3 @@ Creature::Creature(const char* names, const char* descriptions, Room*locations, 
 };
 Creature::~Creature()
 {};
-void Creature::Update()
-{
-	printf("Hy.\n");
-}

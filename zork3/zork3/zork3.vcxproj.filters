@@ -51,6 +51,9 @@
     <ClCompile Include="MyString.cpp">
       <Filter>Archivos de código fuente\Vectors &amp; Strings</Filter>
     </ClCompile>
+    <ClCompile Include="talkingNPC.cpp">
+      <Filter>Archivos de código fuente\entities\Creatures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Archivos de código fuente\Vectors &amp; Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="talkingNPC.h">
+      <Filter>Archivos de código fuente\entities\Creatures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

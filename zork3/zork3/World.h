@@ -3,11 +3,14 @@
 
 #include"Entity.h"
 #include"Room.h"
+#include "Creature.h"
 #include"Player.h"
 #include"Exit.h"
 #include "Item.h"
-#include "Creature.h"
+#include "talkingNPC.h"
+
 #include "Vector.h"
+
 
 class World
 {
