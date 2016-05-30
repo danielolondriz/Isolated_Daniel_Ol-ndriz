@@ -107,6 +107,7 @@ void World::CreateWorld()
 	//player
 	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100,20,0, CREATURE));
 
+	talker = (talkingNPC*)entities[39];
 	ThePlayer = (Player*)entities[40];
 
 }

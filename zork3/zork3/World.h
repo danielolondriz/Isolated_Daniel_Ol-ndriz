@@ -18,6 +18,7 @@ class World
 public:
 	Vector<Entity*> entities;
 	Player* ThePlayer;
+	talkingNPC *talker = nullptr;
 public: 
 	World();
 	void CreateWorld();
