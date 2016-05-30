@@ -116,7 +116,11 @@ void World::printItems()
 	{
 		if (((Item*)entities[i])->location == ThePlayer->location)
 		{
-			printf("In this room there is a %s\n\n", ((Item*)entities[i])->name);
+			if (((Item*)entities[i])->inventory == false)
+			{
+				printf("In this room there is a %s\n\n", ((Item*)entities[i])->name);
+			}
+			
 		}
 	}
 }
@@ -262,7 +266,19 @@ void World::movement()
 							}
 							else
 							{
-								printf("\nYou are in : %s\n", ThePlayer->location->description);
+								printf("\nWhat do you want to pick\n");
+							}
+						}
+						else if (tokens[0] == "drop" && tokens.size() >= 1)
+						{
+							if (tokens.size() >= 2)
+							{
+								ThePlayer->Drop(tokens);
+								continue;
+							}
+							else
+							{
+								printf("\nWhat do you want to drop\n");
 							}
 						}
 
