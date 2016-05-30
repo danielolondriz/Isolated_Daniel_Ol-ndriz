@@ -203,3 +203,42 @@ void Player::Equip(Vector<MyString>& item)
 		}
 	}
 }
+void Player::Unequip(Vector<MyString>& item)
+{
+	for (uint i = 34; i < 38; i++)
+	{
+		if (item[1] == ((Item*)world->entities[i])->name)
+		{
+			if (((Item*)world->entities[i])->inventory == true)
+			{
+				if (((Item*)world->entities[i])->equip == true)
+				{
+					printf("\n\nYou've unequipped the %s!\n\n", ((Item*)world->entities[i])->name);
+					((Item*)world->entities[i])->equip = false;
+					elementseq--;
+					if (((Item*)world->entities[i])->name == "knife")
+					{
+						world->ThePlayer->damage -= 30;
+					}
+					if (((Item*)world->entities[i])->name == "crowbar")
+					{
+						world->ThePlayer->damage -= 10;
+					}
+					if (((Item*)world->entities[i])->name == "flashlight")
+					{
+						for (uint i = 0; i < 22; i++)
+						{
+							if (((Room*)world->entities[i])->light == true)
+							{
+								if (((Room*)world->entities[i])->lightopen == true)
+								{
+									((Room*)world->entities[i])->lightopen =false;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

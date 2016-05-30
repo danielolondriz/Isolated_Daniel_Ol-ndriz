@@ -293,6 +293,18 @@ void World::movement()
 								printf("\nWhat do you want to equip\n");
 							}
 						}
+						else if (tokens[0] == "unequip" && tokens.size() >= 1)
+						{
+							if (tokens.size() >= 2)
+							{
+								ThePlayer->Unequip(tokens);
+								continue;
+							}
+							else
+							{
+								printf("\nWhat do you want to unequip\n");
+							}
+						}
 						
 					}
 
