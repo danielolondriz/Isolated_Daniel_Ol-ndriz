@@ -4,4 +4,7 @@ class Player : public Creature
 public:
 	Player(const char*, const char*, Room*, uint, ObjectType);
 	~Player();
+public:
+	void Go(const dir)const;
+	
 };

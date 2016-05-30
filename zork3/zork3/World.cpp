@@ -106,7 +106,8 @@ void World::CreateWorld()
 	entities.Push_back(new talkingNPC("Walking vendor", "Robot walking vendor", (Room*)entities[1], 100, CREATURE));
 	//player
 	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100, CREATURE));
-	
+
+	ThePlayer = (Player*)entities[40];
 
 }
 void World::movement()
@@ -126,7 +127,10 @@ void World::movement()
 		//Executa el codi cada x milisegons (DELAY)
 		currenttime = GetTickCount();
 		if (currenttime >= (initialtime + DELAY)){
-			//printf("Hy.\n");
+			//printf("Hy.\n
+			system("cls");
+			printf("You are  at: %s\n", world->ThePlayer->location->name);
+			printf("Your command is: %s\n", command);
 			initialtime = currenttime;
 			for (int i = 0; i < entities.size(); i++)
 			{
@@ -136,38 +140,46 @@ void World::movement()
 		}
 
 		//kbhit 
+		
 		if (_kbhit())
 		{
 			for (int i = 0; i < entities.size(); i++)
 			{
 			entities[i]->Update();
 			}
-			if (charcommandnum < (COMMANDBUFFER - 2)){
-				command[charcommandnum] = _getch();
-				if (command == "q\0")
-				{
-					break;
+			
+				if (charcommandnum < (COMMANDBUFFER - 2)){
+					command[charcommandnum] = _getch();
+					command[charcommandnum + 1] = '\0';
+					//printf("String: %s\n", command);//prints command
+					
+					charcommandnum++;
+					if (command[charcommandnum - 1] == '\r'){//prints full comand
+						printf("Your command is: %s\n", command);
+						command[charcommandnum - 1] = '\0';
+						charcommandnum = 0;
+						option = command;
+
+						Vector <MyString> tokens = option.tokenize(" ", command);
+						if (option == "q" || option == "quit")
+						{
+							break;
+						}
+						if (option.empty() || option == "\r")
+						{
+							continue;
+						}
+						if (tokens[0] == "go" && tokens.size() >= 1)
+						{
+							ThePlayer->Go(north);
+						}
+					}
+
 				}
-				command[charcommandnum + 1] = '\0';
-				printf("String: %s\n", command);//prints command
-				//system("cls");
-				charcommandnum++;
-				if (command[charcommandnum - 1] == '\r'){//prints full comand
-					printf("Your command is: %s\n", command);
-					command[charcommandnum] = '\0';
-					charcommandnum = 0;
-					option = command;
-					Vector <MyString> tokens = option.tokenize(" ", command);
-					if (option == "q\r")
-					{
-						break;
-					}					//break;
+				else{
+					command[COMMANDBUFFER - 1] = '\0';
 				}
-				
-			}
-			else{
-				command[COMMANDBUFFER - 1] = '\0';
-			}
+			
 		}
 	}
 	
