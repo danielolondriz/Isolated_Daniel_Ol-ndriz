@@ -16,4 +16,5 @@ public:
 	void Open()const;
 	void Close()const;
 	void Pick(Vector<MyString>&);
+	void Drop(Vector<MyString>&);
 };

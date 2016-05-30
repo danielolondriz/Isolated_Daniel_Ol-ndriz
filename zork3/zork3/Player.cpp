@@ -122,7 +122,7 @@ void Player::Pick(Vector<MyString>& item)
 					if (elementsinv < maxcap)
 					{
 						printf("\n\nyou've picked the %s!\n\n", ((Item*)world->entities[i])->name);
-						((Item*)world->entities[i])->inventory == true;
+						((Item*)world->entities[i])->inventory = true;
 						((Item*)world->entities[i])->location = world->ThePlayer->location;
 						elementsinv++;
 					}
@@ -131,6 +131,25 @@ void Player::Pick(Vector<MyString>& item)
 						printf("\n\nthere is no room in your pockets!\n\n");
 					}
 					
+				}
+			}
+		}
+	}
+}
+void Player::Drop(Vector<MyString>& item)
+{
+	for (uint i = 34; i < 38; i++)
+	{
+		if (item[1] == ((Item*)world->entities[i])->name)
+		{
+			//if (((Item*)world->entities[i])->location == world->ThePlayer->location)
+			{
+				if (((Item*)world->entities[i])->inventory == true)
+				{
+					printf("\n\nyou've dropped the %s!\n\n", ((Item*)world->entities[i])->name);
+					((Item*)world->entities[i])->inventory = false;
+					((Item*)world->entities[i])->location = world->ThePlayer->location;
+					elementsinv--;
 				}
 			}
 		}
