@@ -11,4 +11,5 @@ public:
 	void Move();
 	void Talk();
 	void dead();
+	void respond();
 };

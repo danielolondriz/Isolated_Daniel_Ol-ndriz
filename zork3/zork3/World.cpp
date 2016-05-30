@@ -178,6 +178,9 @@ void World::movement()
 						option = command;
 
 						Vector <MyString> tokens = option.tokenize(" ", command);
+						words = tokens;
+						temporal = command;
+					//	command = "\0";
 						if (option == "q" || option == "quit")
 						{
 							break;

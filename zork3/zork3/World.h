@@ -17,6 +17,8 @@ class World
 {
 public:
 	Vector<Entity*> entities;
+	Vector <MyString> words;
+	MyString temporal;
 	Player* ThePlayer;
 	talkingNPC *talker = nullptr;
 public: 
@@ -24,6 +26,7 @@ public:
 	void CreateWorld();
 	void movement();
 	void printItems();
+	
 };
 
 extern World *world;
