@@ -1,5 +1,9 @@
+
+enum State{ MOVING, TALKING, DEAD, DISAPPEAR };
 class talkingNPC : public Creature
 {
+public:
+	State Tstate;
 public:
 	talkingNPC(const char*, const char*, Room*, uint, uint, ObjectType);
 	~talkingNPC();

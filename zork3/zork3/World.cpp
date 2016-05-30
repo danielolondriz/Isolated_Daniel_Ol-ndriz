@@ -112,7 +112,7 @@ void World::CreateWorld()
 }
 void World::printItems()
 {
-	for (uint i = 34; i < 38; i++)
+	for (uint i = 34; i < 39; i++)
 	{
 		if (((Item*)entities[i])->location == ThePlayer->location)
 		{
@@ -305,6 +305,19 @@ void World::movement()
 								printf("\nWhat do you want to unequip\n");
 							}
 						}
+						if (tokens.size() >= 4)
+						{
+						 if (tokens[0] == "put" && tokens.size() >= 1 && tokens[3] == "bag")
+						{
+
+							ThePlayer->Put(tokens);
+						}
+						else if (tokens[0] == "get" && tokens.size() >= 1 && tokens[3] == "bag")
+						{
+							ThePlayer->Get(tokens);
+						}
+						}
+
 						
 					}
 

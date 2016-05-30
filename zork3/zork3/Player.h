@@ -19,4 +19,6 @@ public:
 	void Drop(Vector<MyString>&);
 	void Equip(Vector<MyString>&);
 	void Unequip(Vector<MyString>&);
+	void Put(Vector<MyString>&);
+	void Get(Vector<MyString>&);
 };

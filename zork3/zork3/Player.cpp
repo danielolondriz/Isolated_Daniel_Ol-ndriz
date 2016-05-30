@@ -111,7 +111,7 @@ void Player::Close()const
 }
 void Player::Pick(Vector<MyString>& item)
 {
-	for (uint i = 34; i < 38; i++)
+	for (uint i = 34; i < 39; i++)
 	{
 		if (item[1] == ((Item*)world->entities[i])->name)
 		{
@@ -124,6 +124,8 @@ void Player::Pick(Vector<MyString>& item)
 						if ((item[1] == "bag"))
 						{
 							maxcap = maxcap + 2;
+							if (((Item*)world->entities[i])->InBox == true);
+							((Item*)world->entities[i])->inventory = true;
 						}
 						printf("\n\nyou've picked the %s!\n\n", ((Item*)world->entities[i])->name);
 						((Item*)world->entities[i])->inventory = true;
@@ -142,7 +144,7 @@ void Player::Pick(Vector<MyString>& item)
 }
 void Player::Drop(Vector<MyString>& item)
 {
-	for (uint i = 34; i < 38; i++)
+	for (uint i = 34; i < 39; i++)
 	{
 		if (item[1] == ((Item*)world->entities[i])->name)
 		{
@@ -165,7 +167,7 @@ void Player::Drop(Vector<MyString>& item)
 }
 void Player::Equip(Vector<MyString>& item)
 {
-	for (uint i = 34; i < 38; i++)
+	for (uint i = 34; i < 39; i++)
 	{
 		if (item[1] == ((Item*)world->entities[i])->name)
 		{
@@ -205,7 +207,7 @@ void Player::Equip(Vector<MyString>& item)
 }
 void Player::Unequip(Vector<MyString>& item)
 {
-	for (uint i = 34; i < 38; i++)
+	for (uint i = 34; i < 39; i++)
 	{
 		if (item[1] == ((Item*)world->entities[i])->name)
 		{
@@ -237,6 +239,57 @@ void Player::Unequip(Vector<MyString>& item)
 							}
 						}
 					}
+				}
+			}
+		}
+	}
+}
+void Player::Put(Vector<MyString>& item)
+{
+	if (world->ThePlayer->location == ((Item*)world->entities[38])->location || ((Item*)world->entities[38])->inventory==true)
+	{
+		for (uint i = 34; i < 39; i++)
+		{
+			if (item[1] == ((Item*)world->entities[i])->name)
+			{
+				if (((Item*)world->entities[i])->inventory == true)
+				{
+					if (((Item*)world->entities[i])->InBox == false)
+					{
+						((Item*)world->entities[i])->InBox = true;
+						if (((Item*)world->entities[38])->inventory == false)
+						{
+							((Item*)world->entities[i])->inventory = false;
+							printf("\nyou've put %s into the bag\n", ((Item*)world->entities[i])->name);
+							elementseq--;
+							return;
+						}
+						printf("\nyou've put %s into the bag\n", ((Item*)world->entities[i])->name);
+						return;
+					}
+				}
+			}
+		}
+	}
+
+}
+void Player::Get(Vector<MyString>& item)
+{
+	if (world->ThePlayer->location == ((Item*)world->entities[38])->location || ((Item*)world->entities[38])->inventory == true)
+	{
+		for (uint i = 34; i < 39; i++)
+		{
+			if (item[1] == ((Item*)world->entities[i])->name)
+			{
+				if (((Item*)world->entities[i])->InBox == true)
+				{
+					if (((Item*)world->entities[38])->inventory == false)
+					{
+						((Item*)world->entities[i])->inventory = true;
+						elementseq++;
+					}
+					((Item*)world->entities[i])->InBox = false;
+					printf("you've got the  %s from bag\n", ((Item*)world->entities[i])->name);
 				}
 			}
 		}
