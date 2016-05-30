@@ -233,6 +233,47 @@ void World::movement()
 							}
 
 						}
+						if (tokens[0] == "open" && tokens.size() >= 1)
+						{
+							
+									ThePlayer->Open();
+									printf("\nThe Door has opened\n");
+							
+							
+						}
+							else if (tokens[0] == "close" && tokens.size() >= 1)
+							{
+								if (tokens.size() >= 2)
+								{
+									if (tokens[1] == "north")
+									{
+										ThePlayer->Close(north);
+										printf("\nThe Door has closed\n");
+									}
+									if (tokens[1] == "west")
+									{
+										ThePlayer->Close(west);
+										printf("\nThe Door has closed\n");
+									}
+									if (tokens[1] == "south")
+									{
+										ThePlayer->Close(south);
+										printf("\nThe Door has closed\n");
+									}
+									if (tokens[1] == "east")
+									{
+										ThePlayer->Close(east);
+										printf("\nThe Door has closed\n");
+									}
+									continue;
+								}
+								else
+								{
+									printf("\nIn wich direction\n");
+								}
+							}
+
+						
 					}
 
 				}

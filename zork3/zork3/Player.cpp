@@ -51,9 +51,48 @@ void Player::look(const dir dire)const
 			{
 				if (world->ThePlayer->location->name == ((Exit*)world->entities[i])->origin->name)
 				{
-					printf("\n\n You can see: %s \n", ((Exit*)world->entities[i])->destination->name);
-					printf("\n\n  %s \n\n", ((Exit*)world->entities[i])->destination->description);
+					//printf("\n\n You can see: %s \n", ((Exit*)world->entities[i])->destination->name);
+					printf("\n\n  %s \n\n", ((Exit*)world->entities[i])->description);
 					//printf("\n\n You can see: %s \n\n", ((Exit*)world->entities[i]))->destination->name));
+				}
+			}
+		}
+	}
+}
+void Player::Open()const
+{
+	for (uint i = 0; i < 40; i++)
+	{
+		if (world->entities[i]->type == EXIT)
+		{
+			if (((Exit*)world->entities[i])->hasDoor == true)
+			{
+				if (((Exit*)world->entities[i])->open == true)
+				{
+					if (world->ThePlayer->location->name == ((Exit*)world->entities[i])->origin->name || world->ThePlayer->location->name == ((Exit*)world->entities[i])->destination->name)
+					{
+						((Exit*)world->entities[i])->open = false;
+					}
+					
+				}
+			}
+		}
+	}
+}
+void Player::Close(dir dire)const
+{
+	for (uint i = 0; i < 40; i++)
+	{
+		if (world->entities[i]->type == EXIT)
+		{
+			if (((Exit*)world->entities[i])->hasDoor == true)
+			{
+				if (((Exit*)world->entities[i])->open == false)
+				{
+					if (world->ThePlayer->location->name == ((Exit*)world->entities[i])->origin->name || world->ThePlayer->location->name == ((Exit*)world->entities[i])->destination->name)
+					{
+						((Exit*)world->entities[i])->open = true;
+					}
 				}
 			}
 		}
