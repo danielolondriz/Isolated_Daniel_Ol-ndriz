@@ -201,6 +201,38 @@ void World::movement()
 							}
 							
 						}
+						if (tokens[0] == "look" && tokens.size() >= 1)
+						{
+							if (tokens.size() >= 2)
+							{
+								if (tokens[1] == "north")
+								{
+									ThePlayer->look(north);
+
+								}
+								if (tokens[1] == "west")
+								{
+									ThePlayer->look(west);
+
+								}
+								if (tokens[1] == "south")
+								{
+									ThePlayer->look(south);
+
+								}
+								if (tokens[1] == "east")
+								{
+									ThePlayer->look(east);
+
+								}
+								continue;
+							}
+							else
+							{
+								printf("\nYou are in : %s\n", ThePlayer->location->description);
+							}
+
+						}
 					}
 
 				}
