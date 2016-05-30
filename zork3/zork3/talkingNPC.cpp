@@ -1,5 +1,5 @@
 #include "World.h"
-talkingNPC::talkingNPC(const char* names, const char*des, Room* loc, uint li, ObjectType ty) :Creature(names, des, loc, li, ty)
+talkingNPC::talkingNPC(const char* names, const char*des, Room* loc, uint li, uint dam, ObjectType ty) :Creature(names, des, loc, li,dam, ty)
 {}
 talkingNPC::~talkingNPC()
 {}

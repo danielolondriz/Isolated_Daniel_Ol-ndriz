@@ -1,9 +1,12 @@
 
 #include "World.h"
 #include "stdio.h"
-Player::Player(const char* names, const char*des, Room* loc, uint life, ObjectType ty) :Creature(names,des, loc, life,ty)
+Player::Player(const char* names, const char*des, Room* loc, uint life, uint damages, uint cash, ObjectType ty) :Creature(names, des, loc, life, damages, ty), money(cash)
 {
-
+	maxcap = 3;
+	maxeq = 2;
+	elementsinv = 0;
+	elementseq = 0;
 }
 Player::~Player(){};
 
@@ -72,6 +75,10 @@ void Player::Open()const
 					if (world->ThePlayer->location->name == ((Exit*)world->entities[i])->origin->name || world->ThePlayer->location->name == ((Exit*)world->entities[i])->destination->name)
 					{
 						((Exit*)world->entities[i])->open = false;
+						if (world->ThePlayer->location->name == ((Exit*)world->entities[i])->origin->name)
+						{
+							printf("\nThe Door has opened\n");
+						}
 					}
 					
 				}
@@ -79,7 +86,7 @@ void Player::Open()const
 		}
 	}
 }
-void Player::Close(dir dire)const
+void Player::Close()const
 {
 	for (uint i = 0; i < 40; i++)
 	{
@@ -92,7 +99,38 @@ void Player::Close(dir dire)const
 					if (world->ThePlayer->location->name == ((Exit*)world->entities[i])->origin->name || world->ThePlayer->location->name == ((Exit*)world->entities[i])->destination->name)
 					{
 						((Exit*)world->entities[i])->open = true;
+						if (world->ThePlayer->location->name == ((Exit*)world->entities[i])->origin->name)
+						{
+							printf("\nThe Door has closed\n");
+						}
 					}
+				}
+			}
+		}
+	}
+}
+void Player::Pick(Vector<MyString>& item)
+{
+	for (uint i = 34; i < 38; i++)
+	{
+		if (item[1] == ((Item*)world->entities[i])->name)
+		{
+			if (((Item*)world->entities[i])->location == world->ThePlayer->location)
+			{
+				if (((Item*)world->entities[i])->inventory == false)
+				{
+					if (elementsinv < maxcap)
+					{
+						printf("\n\nyou've picked the %s!\n\n", ((Item*)world->entities[i])->name);
+						((Item*)world->entities[i])->inventory == true;
+						((Item*)world->entities[i])->location = world->ThePlayer->location;
+						elementsinv++;
+					}
+					else
+					{
+						printf("\n\nthere is no room in your pockets!\n\n");
+					}
+					
 				}
 			}
 		}

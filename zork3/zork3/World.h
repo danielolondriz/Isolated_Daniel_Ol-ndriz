@@ -22,6 +22,7 @@ public:
 	World();
 	void CreateWorld();
 	void movement();
+	void printItems();
 };
 
 extern World *world;

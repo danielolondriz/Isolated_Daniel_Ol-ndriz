@@ -103,12 +103,22 @@ void World::CreateWorld()
 	
 	//CREATURES
 	//NPC
-	entities.Push_back(new talkingNPC("Walking vendor", "Robot walking vendor", (Room*)entities[1], 100, CREATURE));
+	entities.Push_back(new talkingNPC("Walking vendor", "Robot walking vendor", (Room*)entities[1], 100,0, CREATURE));
 	//player
-	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100, CREATURE));
+	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100,20,0, CREATURE));
 
 	ThePlayer = (Player*)entities[40];
 
+}
+void World::printItems()
+{
+	for (uint i = 34; i < 38; i++)
+	{
+		if (((Item*)entities[i])->location == ThePlayer->location)
+		{
+			printf("In this room there is a %s\n\n", ((Item*)entities[i])->name);
+		}
+	}
 }
 void World::movement()
 {
@@ -130,7 +140,9 @@ void World::movement()
 			//printf("Hy.\n
 			//system("cls");
 			printf("You are  at: %s\n", world->ThePlayer->location->name);
+			printItems();
 			printf("Your command is: %s\n", command);
+			
 			initialtime = currenttime;
 			for (int i = 0; i < entities.size(); i++)
 			{
@@ -165,11 +177,11 @@ void World::movement()
 						{
 							break;
 						}
-						if (option.empty() || option == "\r")
+						else if (option.empty() || option == "\r")
 						{
 							continue;
 						}
-						if (tokens[0] == "go" && tokens.size() >= 1)
+						else if (tokens[0] == "go" && tokens.size() >= 1)
 						{
 							if (tokens.size() >= 2)
 							{
@@ -201,7 +213,7 @@ void World::movement()
 							}
 							
 						}
-						if (tokens[0] == "look" && tokens.size() >= 1)
+						else if (tokens[0] == "look" && tokens.size() >= 1)
 						{
 							if (tokens.size() >= 2)
 							{
@@ -233,45 +245,26 @@ void World::movement()
 							}
 
 						}
-						if (tokens[0] == "open" && tokens.size() >= 1)
+						else if (tokens[0] == "open" && tokens.size() >= 1)
 						{
-							
 									ThePlayer->Open();
-									printf("\nThe Door has opened\n");
-							
-							
 						}
-							else if (tokens[0] == "close" && tokens.size() >= 1)
+						else if (tokens[0] == "close" && tokens.size() >= 1)
+						{	
+									ThePlayer->Close();	
+						}
+						else if (tokens[0] == "pick" && tokens.size() >= 1)
+						{
+							if (tokens.size() >= 2)
 							{
-								if (tokens.size() >= 2)
-								{
-									if (tokens[1] == "north")
-									{
-										ThePlayer->Close(north);
-										printf("\nThe Door has closed\n");
-									}
-									if (tokens[1] == "west")
-									{
-										ThePlayer->Close(west);
-										printf("\nThe Door has closed\n");
-									}
-									if (tokens[1] == "south")
-									{
-										ThePlayer->Close(south);
-										printf("\nThe Door has closed\n");
-									}
-									if (tokens[1] == "east")
-									{
-										ThePlayer->Close(east);
-										printf("\nThe Door has closed\n");
-									}
-									continue;
-								}
-								else
-								{
-									printf("\nIn wich direction\n");
-								}
+								ThePlayer->Pick(tokens);
+								continue;
 							}
+							else
+							{
+								printf("\nYou are in : %s\n", ThePlayer->location->description);
+							}
+						}
 
 						
 					}
