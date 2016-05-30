@@ -281,7 +281,18 @@ void World::movement()
 								printf("\nWhat do you want to drop\n");
 							}
 						}
-
+						else if (tokens[0] == "equip" && tokens.size() >= 1)
+						{
+							if (tokens.size() >= 2)
+							{
+								ThePlayer->Equip(tokens);
+								continue;
+							}
+							else
+							{
+								printf("\nWhat do you want to equip\n");
+							}
+						}
 						
 					}
 

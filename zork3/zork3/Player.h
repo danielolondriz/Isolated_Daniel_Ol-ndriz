@@ -17,4 +17,6 @@ public:
 	void Close()const;
 	void Pick(Vector<MyString>&);
 	void Drop(Vector<MyString>&);
+	void Equip(Vector<MyString>&);
+	void Unequip(Vector<MyString>&);
 };

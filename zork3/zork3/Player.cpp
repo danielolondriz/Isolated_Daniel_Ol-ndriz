@@ -121,6 +121,10 @@ void Player::Pick(Vector<MyString>& item)
 				{
 					if (elementsinv < maxcap)
 					{
+						if ((item[1] == "bag"))
+						{
+							maxcap = maxcap + 2;
+						}
 						printf("\n\nyou've picked the %s!\n\n", ((Item*)world->entities[i])->name);
 						((Item*)world->entities[i])->inventory = true;
 						((Item*)world->entities[i])->location = world->ThePlayer->location;
@@ -142,14 +146,58 @@ void Player::Drop(Vector<MyString>& item)
 	{
 		if (item[1] == ((Item*)world->entities[i])->name)
 		{
-			//if (((Item*)world->entities[i])->location == world->ThePlayer->location)
-			{
+		
 				if (((Item*)world->entities[i])->inventory == true)
 				{
+					if ((item[1] == "bag"))
+					{
+						maxcap = maxcap - 2;
+					}
 					printf("\n\nyou've dropped the %s!\n\n", ((Item*)world->entities[i])->name);
 					((Item*)world->entities[i])->inventory = false;
+					((Item*)world->entities[i])->equip = false;
 					((Item*)world->entities[i])->location = world->ThePlayer->location;
 					elementsinv--;
+				}
+			}
+		}
+	
+}
+void Player::Equip(Vector<MyString>& item)
+{
+	for (uint i = 34; i < 38; i++)
+	{
+		if (item[1] == ((Item*)world->entities[i])->name)
+		{
+			if (((Item*)world->entities[i])->inventory == true)
+			{
+				if (((Item*)world->entities[i])->equip == false)
+				{
+
+					if (elementseq < maxeq)
+					{
+						printf("\n\nYou've equipped the %s!\n\n", ((Item*)world->entities[i])->name);
+						((Item*)world->entities[i])->equip = true;
+						elementseq++;
+						if (((Item*)world->entities[i])->name == "knife")
+						{
+							world->ThePlayer->damage += 30;
+						}
+						if (((Item*)world->entities[i])->name == "crowbar")
+						{
+							world->ThePlayer->damage += 10;
+						}
+						if (((Item*)world->entities[i])->name == "flashlight")
+						{
+							for (uint i = 0; i < 22; i++)
+							{
+								if (((Room*)world->entities[i])->lightopen== false)
+								{
+									((Room*)world->entities[i])->lightopen = true;
+								}
+							}
+						}
+					}
 				}
 			}
 		}
