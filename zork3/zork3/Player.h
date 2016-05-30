@@ -6,5 +6,5 @@ public:
 	~Player();
 public:
 	void Go(const dir)const;
-	
+	void look(const dir)const;
 };

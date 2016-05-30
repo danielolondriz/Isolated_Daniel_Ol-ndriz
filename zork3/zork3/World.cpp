@@ -9,7 +9,7 @@
 #define MAX_EQUIPPED 2
 #define MAX_BOX 2
 //KBHIT
-#define DELAY 1000
+#define DELAY 5000
 #define COMMANDBUFFER 50
 
 World::World(){
@@ -128,7 +128,7 @@ void World::movement()
 		currenttime = GetTickCount();
 		if (currenttime >= (initialtime + DELAY)){
 			//printf("Hy.\n
-			system("cls");
+			//system("cls");
 			printf("You are  at: %s\n", world->ThePlayer->location->name);
 			printf("Your command is: %s\n", command);
 			initialtime = currenttime;
@@ -171,7 +171,35 @@ void World::movement()
 						}
 						if (tokens[0] == "go" && tokens.size() >= 1)
 						{
-							ThePlayer->Go(north);
+							if (tokens.size() >= 2)
+							{
+								if (tokens[1] == "north")
+								{
+									ThePlayer->Go(north);
+									
+								}
+								if (tokens[1] == "west")
+								{
+									ThePlayer->Go(west);
+									
+								}
+								if (tokens[1] == "south")
+								{
+									ThePlayer->Go(south);
+									
+								}
+								if (tokens[1] == "east")
+								{
+									ThePlayer->Go(east);
+									
+								}
+								continue;
+							}
+							else
+							{
+								printf("\nWhere\n");
+							}
+							
 						}
 					}
 
