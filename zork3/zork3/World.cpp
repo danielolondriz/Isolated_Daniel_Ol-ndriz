@@ -163,7 +163,14 @@ void World::movement()
 		if (currenttime >= (initialtime + DELAY)){
 			if (world->ThePlayer->life <= 0)
 			{
-				printf("\n\nYOU DIED!\n\n")
+				printf("\n\nYOU DIED!\n\n");
+				system("pause");
+				return;
+			}
+			if (world->TheKiller->life <= 0)
+			{
+				printf("\n\nYOU WON!\n\n");
+				system("pause");
 				return;
 			}
 			//printf("Hy.\n
@@ -342,6 +349,10 @@ void World::movement()
 							{
 								 printShop();
 							}
+							 if (tokens[0] == "attack" && tokens[1] == "killer")
+							 {
+								 ThePlayer->attack(tokens);
+							 }
 						}
 						if (tokens.size() >= 4)
 						{

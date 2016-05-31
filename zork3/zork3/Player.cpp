@@ -155,6 +155,22 @@ void Player::buy(Vector<MyString>& item)
 		}
 	}
 }
+void Player::attack(Vector<MyString>& item)
+{
+	if (world->ThePlayer->location == world->TheKiller->location)
+	{
+		if (world->TheKiller->life > 0)
+		{
+			world->TheKiller->life -= world->ThePlayer->damage;
+			printf("\nYou attacked the killer and now he is at %i of life", world->TheKiller->life);
+		}
+		else
+		{
+			printf("\n You've killed the Killer!!!!!\n\n");
+		}
+		
+	}
+}
 void Player::sell(Vector<MyString>& item)
 {
 	if (world->ThePlayer->location == world->TheSeller->location)
