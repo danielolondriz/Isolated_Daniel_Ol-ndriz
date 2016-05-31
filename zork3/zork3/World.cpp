@@ -42,7 +42,7 @@ void World::CreateWorld()
 	entities.Push_back(new Room("South Train Station, you can se a seller", "This is the south train station. There is a train, but it doesn't seem to work.\n", false, true,ROOM));
 	//room 11
 	entities.Push_back(new Room("North Train Station", "This is the magestic North train station. Yet no train seems to be coming...\n", false, true,ROOM));
-
+	
 	//EXITS
 	//exit 0
 	entities.Push_back(new Exit((Room*)entities[0], (Room*)entities[10], west,false, false, "Train Station", "you see the Train station",EXIT));
@@ -108,10 +108,13 @@ void World::CreateWorld()
 	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100,20,50, CREATURE));
 	//sellerNPC
 	entities.Push_back(new SellerNPC("Seller", "This is a vendor", (Room*)entities[10], 100, 20, CREATURE));
+	//Killer
+	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[0], 100,30, CREATURE));
 
 	talker = (talkingNPC*)entities[39];
 	ThePlayer = (Player*)entities[40];
 	TheSeller = (SellerNPC*)entities[41];
+	TheKiller = (Killer*)entities[42];
 }
 void World::printItems()
 {
@@ -158,6 +161,11 @@ void World::movement()
 		//Executa el codi cada x milisegons (DELAY)
 		currenttime = GetTickCount();
 		if (currenttime >= (initialtime + DELAY)){
+			if (world->ThePlayer->life <= 0)
+			{
+				printf("\n\nYOU DIED!\n\n")
+				return;
+			}
 			//printf("Hy.\n
 			//system("cls");
 			printf("You are  at: %s\n", world->ThePlayer->location->name);
@@ -170,6 +178,8 @@ void World::movement()
 				entities[i]->Update();
 			}
 			
+
+			
 		}
 
 		//kbhit 
@@ -178,7 +188,7 @@ void World::movement()
 		{
 			for (int i = 0; i < entities.size(); i++)
 			{
-			entities[i]->Update();
+			//entities[i]->Update();
 			}
 			
 				if (charcommandnum < (COMMANDBUFFER - 2)){

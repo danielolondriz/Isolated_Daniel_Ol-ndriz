@@ -26,6 +26,7 @@ public:
 	Player* ThePlayer;
 	talkingNPC *talker = nullptr;
 	SellerNPC *TheSeller = nullptr;
+	Killer *TheKiller = nullptr;
 public: 
 	World();
 	void CreateWorld();

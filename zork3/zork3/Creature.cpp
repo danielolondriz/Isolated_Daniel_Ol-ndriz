@@ -6,7 +6,7 @@
 //#include <Windows.h>
 #define DELAY 1000
 #define COMMANDBUFFER 50
-Creature::Creature(const char* names, const char* descriptions, Room*locations, uint lifes,uint damages, ObjectType types) :Entity(names, descriptions, types), location(locations), life(lifes), damage(damages)
+Creature::Creature(const char* names, const char* descriptions, Room*locations, int lifes,uint damages, ObjectType types) :Entity(names, descriptions, types), location(locations), life(lifes), damage(damages)
 {
 };
 Creature::~Creature()
