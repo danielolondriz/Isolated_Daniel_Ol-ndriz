@@ -1,22 +1,23 @@
 # Zork1_Daniel_Olondriz
-ZORK 2 NOTES
+ZORK 3 NOTES
 
-Althoug a commit was made by the User Vulpem, it was me, from a computer of the Univerity that had another name logged in
-
-5 items can be found in this game: two in the shop, the bag in the Haunted House, the crowbar in the ferris wheel, and the knife in the roller coaster.
+5 items can be found in this game: the flashlight in the shop, the bag in the Haunted House, the crowbar in the ferris wheel, and the knife & the ticket in the store at the South Station.
 
 
 SPECIAL FEATURES 
 
-We commented that this game special features would be using a flashlight to get it some rooms, and the abilty to travel through train stations if the player owns a ticket.
+if you buy a ticket from the store at the South Train Station, and type use ticket, you can travel to station from station; 
+If you drop an item at the South station, the seller will take it and it will be a buyable object;
+
 
 ZORK 1 NOTES
 
 NOTE: "Restructuration of code" and "Big changes: All iterations added" commits were made a day before, so they should be between "almost all instructions done" and "updated readme" commits in the timeline.
 
 NOTE: The door is located in the Shop.
+
 DESCRPITION
--Welcome is The Hunt!
+-Welcome to ISOLATED!
  -Get through an abandoned theme park to find a hidden murderer and solve a misterious case!
  
  -Commands:
@@ -24,7 +25,6 @@ DESCRPITION
  -To move:
  go north/south/east/west
  n/s/e/w
- north/south/east/west
  
  -To inspect places use look & where you want to look!
  
@@ -38,7 +38,19 @@ DESCRPITION
  
  -To put/get an item from the bag use put/get +item +into/from +item!
  
- -If any help needed write the comand help.
+ -To attack the killer type attack killer (it will continuously attack);
+ 
+ -To do special attack just type "special hit"
+ -Type" buy item from seller" to buy things;
+ -Type" sell item from seller" to buy things;
+-Type "buy seller" to see what is he selling;
+To talk to the robot type (do when its on your room):
+	talk robot-> to start talking.
+	talk robot 1-> for option 1;(if you type this from the beggining he will answer you this option)
+	(option 1 will give you 50 coins if you dont have any!!!)
+	talk robot 2-> for option 2;(if you type this from the beggining he will answer you this option)
+
+
  
  -Good luck.
  
