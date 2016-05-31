@@ -1,6 +1,7 @@
 
 #include "World.h"
 #include "stdio.h"
+#include "Dlist.h"
 Player::Player(const char* names, const char*des, Room* loc, uint life, uint damages, uint cash, ObjectType ty) :Creature(names, des, loc, life, damages, ty), money(cash)
 {
 	maxcap = 3;
@@ -9,6 +10,7 @@ Player::Player(const char* names, const char*des, Room* loc, uint life, uint dam
 	elementseq = 0;
 }
 Player::~Player(){};
+
 
 void Player::Go(const dir dire)const
 {
@@ -109,6 +111,51 @@ void Player::Close()const
 		}
 	}
 }
+void Player::buy(Vector<MyString>& item)
+{
+	Dnode<Entity*>* temp1 = world->TheSeller->SList.first;
+	for (; temp1 != nullptr; temp1 = temp1->next)
+	{
+		
+		for (uint i = 34; i < 39; i++)
+			{
+				// temp1 = world->TheSeller->SList.first;
+				
+				if (item[1] == ((Item*)world->entities[i])->name)
+				{
+					if (((Item*)world->entities[i])->name == temp1->data->name)
+					
+					{
+						if (world->ThePlayer->money >=((Item*)temp1->data)->price)
+						{
+							if (world->ThePlayer->elementsinv < maxcap)
+							{
+								printf("\n You've bought the %s\n\n", ((Item*)temp1->data)->name);
+								((Item*)world->entities[i])->inventory = true;
+								((Item*)world->entities[i])->location = world->ThePlayer->location;
+								elementsinv++;
+								break;
+								;
+								
+							}
+
+						}
+						
+					}
+					
+				}
+				
+				{
+					
+				}
+				
+				
+			}
+	}
+
+}
+
+
 void Player::Pick(Vector<MyString>& item)
 {
 	for (uint i = 34; i < 39; i++)

@@ -91,25 +91,27 @@ void World::CreateWorld()
 
 	//ITEMS
 	//item 0
-	entities.Push_back(new Item("flashlight", "This is a flashlight", (Room*)entities[3], false, false, false, false, ITEM));
+	entities.Push_back(new Item("flashlight", "This is a flashlight", (Room*)entities[3], false, false, false, false, ITEM,10));
 	//item 1
-	entities.Push_back(new Item("crowbar", "This is a crowbar", (Room*)entities[5], false, false, false, false, ITEM));
+	entities.Push_back(new Item("crowbar", "This is a crowbar", (Room*)entities[5], false, false, false, false, ITEM,20));
 	//item 2
-	entities.Push_back(new Item("ticket", "This is a Train Ticket", (Room*)entities[3], false, false, false, false, ITEM));
+	entities.Push_back(new Item("ticket", "This is a Train Ticket", (Room*)entities[10], false, false, false, false, ITEM,50));
 	//item 3
-	entities.Push_back(new Item("knife", "This is a Knife", (Room*)entities[8], false, false, false, false, ITEM));
+	entities.Push_back(new Item("knife", "This is a Knife", (Room*)entities[10], false, false, false, false, ITEM,50));
 	//item 4
-	entities.Push_back(new Item("bag", "This is a bag", (Room*)entities[2], false, false, true, false, ITEM));
+	entities.Push_back(new Item("bag", "This is a bag", (Room*)entities[2], false, false, true, false, ITEM,10));
 	
 	//CREATURES
 	//NPC
-	entities.Push_back(new talkingNPC("Walking vendor", "Robot walking vendor", (Room*)entities[1], 100,0, CREATURE));
+	entities.Push_back(new talkingNPC("Walking robot", "Walking security Robot ", (Room*)entities[1], 100,0, CREATURE));
 	//player
-	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100,20,0, CREATURE));
+	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100,20,50, CREATURE));
+	//sellerNPC
+	entities.Push_back(new SellerNPC("Seller", "This is a vendor", (Room*)entities[10], 100, 20, CREATURE));
 
 	talker = (talkingNPC*)entities[39];
 	ThePlayer = (Player*)entities[40];
-
+	TheSeller = (SellerNPC*)entities[41];
 }
 void World::printItems()
 {
@@ -308,6 +310,10 @@ void World::movement()
 							{
 								printf("\nWhat do you want to unequip\n");
 							}
+						}
+						else if (tokens[0] == "buy" && tokens.size() >= 1)
+						{
+							ThePlayer->buy(tokens);
 						}
 						if (tokens.size() >= 4)
 						{

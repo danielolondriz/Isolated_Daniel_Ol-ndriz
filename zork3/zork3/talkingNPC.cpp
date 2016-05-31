@@ -14,9 +14,9 @@ void talkingNPC::Update()
 		Move();
 		break;
 	case TALKING:
-		if ((world->temporal) == "talk vendor" || (world->temporal) == "talk vendor 1" || (world->temporal) == "talk vendor 2")
+		if ((world->temporal) == "talk robot" || (world->temporal) == "talk robot 1" || (world->temporal) == "talk robot 2")
 		{
-			if ((world->temporal) == "talk vendor")
+			if ((world->temporal) == "talk robot")
 			{
 				Talk();
 			}
@@ -28,10 +28,7 @@ void talkingNPC::Update()
 		}
 		
 		break;
-	case DEAD:
-		break;
-	case DISAPPEAR:
-		break;
+	
 	}
 }
 void talkingNPC::Move()
@@ -50,7 +47,7 @@ void talkingNPC::Talk()
 	{
 		if (world->ThePlayer->location == world->talker->location)
 		{
-			printf("\n\nWhat do you want?\nWhat shall you respond\n1)Hi\n2)Bye\n");
+			printf("\n\nWhat do you want?\nWhat shall you answer\n1)Hi\n2)Bye\n");
 			//respond();
 		}
 		else
@@ -61,12 +58,22 @@ void talkingNPC::Talk()
 }
 void talkingNPC::respond()
 {
-	if (world->temporal == "talk vendor 1")
+	if (world->temporal == "talk robot 1")
 	{
-		printf("\nBeep! It's a lovely day isn't it\n");
-		Talk();
+		if (world->ThePlayer->money == 0)
+		{
+			printf("\nBeep! It's a lovely day isn't it. Looks like you need some money\n");
+			world->ThePlayer->money += 50;
+			printf("The robot gave you 50 dollars!!!\n");
+			Talk();
+		}
+		else
+		{
+			printf("\nBeep! It's a lovely day isn't it.\n");
+			Talk();
+		}
 	}
-	if (world->temporal == "talk vendor 2")
+	if (world->temporal == "talk robot 2")
 	{
 		printf("\nBye! Have a nice trip in CandyLand!\n");
 		world->temporal = "\0";

@@ -9,8 +9,10 @@
 
 #include "Item.h"
 #include "talkingNPC.h"
+#include "SellerNPC.h"
 
 #include "Vector.h"
+#include "Dlist.h"
 
 
 class World
@@ -21,6 +23,7 @@ public:
 	MyString temporal;
 	Player* ThePlayer;
 	talkingNPC *talker = nullptr;
+	SellerNPC *TheSeller = nullptr;
 public: 
 	World();
 	void CreateWorld();

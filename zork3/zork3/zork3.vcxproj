@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="Dlist.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -72,11 +73,13 @@
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="SellerNPC.cpp" />
     <ClCompile Include="talkingNPC.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h" />
+    <ClInclude Include="Dlist.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Item.h" />
@@ -84,6 +87,7 @@
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="SellerNPC.h" />
     <ClInclude Include="talkingNPC.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />

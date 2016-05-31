@@ -1,4 +1,4 @@
-
+#include "Dlist.h"
 enum State{ MOVING, TALKING, DEAD, DISAPPEAR };
 class talkingNPC : public Creature
 {
@@ -10,6 +10,6 @@ public:
 	void Update();
 	void Move();
 	void Talk();
-	void dead();
+	
 	void respond();
 };

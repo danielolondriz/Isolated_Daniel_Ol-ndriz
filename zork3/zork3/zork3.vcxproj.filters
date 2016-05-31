@@ -54,6 +54,12 @@
     <ClCompile Include="talkingNPC.cpp">
       <Filter>Archivos de código fuente\entities\Creatures</Filter>
     </ClCompile>
+    <ClCompile Include="SellerNPC.cpp">
+      <Filter>Archivos de código fuente\entities\Creatures</Filter>
+    </ClCompile>
+    <ClCompile Include="Dlist.cpp">
+      <Filter>Archivos de código fuente\Vectors &amp; Strings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -88,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="talkingNPC.h">
       <Filter>Archivos de código fuente\entities\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="SellerNPC.h">
+      <Filter>Archivos de código fuente\entities\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="Dlist.h">
+      <Filter>Archivos de código fuente\Vectors &amp; Strings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

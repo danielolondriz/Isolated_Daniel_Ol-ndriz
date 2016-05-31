@@ -1,4 +1,4 @@
-
+#include "Dlist.h"
 class Player : public Creature
 {
 public:
@@ -21,4 +21,5 @@ public:
 	void Unequip(Vector<MyString>&);
 	void Put(Vector<MyString>&);
 	void Get(Vector<MyString>&);
+	void buy(Vector<MyString>&);
 };
