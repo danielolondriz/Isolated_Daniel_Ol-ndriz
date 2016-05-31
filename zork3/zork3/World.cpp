@@ -149,7 +149,7 @@ void World::movement()
 			printf("You are  at: %s\n", world->ThePlayer->location->name);
 			printItems();
 			printf("Your command is: %s\n", command);
-			
+			printf("You have %i dollars\n", world->ThePlayer->money);
 			initialtime = currenttime;
 			for (int i = 0; i < entities.size(); i++)
 			{
@@ -175,6 +175,7 @@ void World::movement()
 					charcommandnum++;
 					if (command[charcommandnum - 1] == '\r'){//prints full comand
 						printf("Your command is: %s\n", command);
+						
 						command[charcommandnum - 1] = '\0';
 						charcommandnum = 0;
 						option = command;
@@ -311,10 +312,7 @@ void World::movement()
 								printf("\nWhat do you want to unequip\n");
 							}
 						}
-						else if (tokens[0] == "buy" && tokens.size() >= 1)
-						{
-							ThePlayer->buy(tokens);
-						}
+						
 						if (tokens.size() >= 4)
 						{
 						 if (tokens[0] == "put" && tokens.size() >= 1 && tokens[3] == "bag")
@@ -325,6 +323,14 @@ void World::movement()
 						else if (tokens[0] == "get" && tokens.size() >= 1 && tokens[3] == "bag")
 						{
 							ThePlayer->Get(tokens);
+						}
+						else if (tokens[0] == "buy" && tokens.size() >= 1 && tokens[3] == "seller")
+						{
+							ThePlayer->buy(tokens);
+						}
+						else if (tokens[0] == "sell" && tokens.size() >= 1 && tokens[3] == "seller")
+						{
+							ThePlayer->sell(tokens);
 						}
 						}
 

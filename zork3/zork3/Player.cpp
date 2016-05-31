@@ -113,46 +113,103 @@ void Player::Close()const
 }
 void Player::buy(Vector<MyString>& item)
 {
-	Dnode<Entity*>* temp1 = world->TheSeller->SList.first;
-	for (; temp1 != nullptr; temp1 = temp1->next)
+	if (world->ThePlayer->location == world->TheSeller->location)
 	{
-		
-		for (uint i = 34; i < 39; i++)
+		//printf("You have %i dollars", world->ThePlayer->money);
+		Dnode<Entity*>* temp1 = world->TheSeller->SList.first;
+		for (; temp1 != nullptr; temp1 = temp1->next)
+		{
+
+			for (uint i = 34; i < 39; i++)
 			{
 				// temp1 = world->TheSeller->SList.first;
-				
+
 				if (item[1] == ((Item*)world->entities[i])->name)
 				{
 					if (((Item*)world->entities[i])->name == temp1->data->name)
-					
+
 					{
-						if (world->ThePlayer->money >=((Item*)temp1->data)->price)
+						if (world->ThePlayer->money >= ((Item*)temp1->data)->price)
 						{
 							if (world->ThePlayer->elementsinv < maxcap)
 							{
 								printf("\n You've bought the %s\n\n", ((Item*)temp1->data)->name);
 								((Item*)world->entities[i])->inventory = true;
 								((Item*)world->entities[i])->location = world->ThePlayer->location;
+								world->TheSeller->SList.erase(temp1);
+								world->ThePlayer->money -= ((Item*)world->entities[i])->price;
 								elementsinv++;
-								break;
+								return;
 								;
-								
+
 							}
 
 						}
-						
-					}
-					
-				}
-				
-				{
-					
-				}
-				
-				
-			}
-	}
 
+					}
+
+				}
+
+
+			}
+		}
+	}
+}
+void Player::sell(Vector<MyString>& item)
+{
+	if (world->ThePlayer->location == world->TheSeller->location)
+	{
+		printf("\nYou have %i dollars\n", world->ThePlayer->money);
+		for (uint i = 34; i < 39; i++)
+		{
+			if (((Item*)world->entities[i])->name == item[1])
+			{
+				if (((Item*)world->entities[i])->inventory == true)
+				{
+					((Item*)world->entities[i])->inventory = false;
+					world->TheSeller->SList.push_back(((Item*)world->entities[i]));
+					world->ThePlayer->money += ((Item*)world->entities[i])->price;
+					printf("\n You've sold the %s\n Now you have %i\n\n", ((Item*)world->entities[i])->name,world->ThePlayer->money);
+					return;
+				}
+			}
+		}
+		/*Dnode<Entity*>* temp1 = world->TheSeller->SList.first;
+		for (; temp1 != nullptr; temp1 = temp1->next)
+		{
+
+			for (uint i = 34; i < 39; i++)
+			{
+				// temp1 = world->TheSeller->SList.first;
+
+				if (item[1] == ((Item*)world->entities[i])->name)
+				{
+					if (((Item*)world->entities[i])->name == temp1->data->name)
+
+					{
+						if (world->ThePlayer->money >= ((Item*)temp1->data)->price)
+						{
+							if (world->ThePlayer->elementsinv < maxcap)
+							{
+								printf("\n You've sold the %s\n\n", ((Item*)temp1->data)->name);
+								((Item*)world->entities[i])->inventory = true;
+								((Item*)world->entities[i])->location = world->ThePlayer->location;
+								elementsinv++;
+								break;
+								;
+
+							}
+
+						}
+
+					}
+
+				}
+
+
+			}
+		}*/
+	}
 }
 
 

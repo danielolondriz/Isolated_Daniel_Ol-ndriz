@@ -22,4 +22,5 @@ public:
 	void Put(Vector<MyString>&);
 	void Get(Vector<MyString>&);
 	void buy(Vector<MyString>&);
+	void sell(Vector<MyString>&);
 };
