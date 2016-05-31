@@ -34,7 +34,7 @@ public:
 	void movement();
 	void printItems();
 	void printShop();
-	
+	void printinv();
 };
 
 extern World *world;

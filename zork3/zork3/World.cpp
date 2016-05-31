@@ -130,6 +130,16 @@ void World::printItems()
 		}
 	}
 }
+void World::printinv()
+{
+	for (uint i = 34; i < 39; i++)
+	{
+		if (((Item*)entities[i])->inventory == true)
+		{
+			printf("You have  %s in the inventory\n\n", ((Item*)entities[i])->name);
+		}
+	}
+}
 void World::printShop()
 {
 	if (ThePlayer->location == TheSeller->location)
@@ -262,6 +272,10 @@ void World::movement()
 								{
 									ThePlayer->Go(east);
 
+								}
+								if (tokens[0] == "i")
+								{
+									printinv();
 								}
 							}
 						 if (tokens[0] == "go" && tokens.size() >= 1)
