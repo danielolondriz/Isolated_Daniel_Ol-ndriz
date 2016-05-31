@@ -35,7 +35,16 @@ void Killer::Fight()
 		if (world->ThePlayer->life > 0)
 		{
 			world->ThePlayer->life -= world->TheKiller->damage;
-			printf("\nThe killer attacked you and now you are at %i of life", world->ThePlayer->life);
+			if (world->ThePlayer->life >= 10)
+			{
+				printf("\nThe killer attacked you and now you are at %i of life\n", world->ThePlayer->life);
+			}
+			else
+			{
+				printf("\nThe killer attacked you and now you are at 0 of life\n", world->ThePlayer->life);
+			}
+
+			
 		}
 		
 	}

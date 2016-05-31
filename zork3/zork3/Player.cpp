@@ -175,6 +175,26 @@ void Player::use(Vector<MyString>& item)
 		}
 	}
 }
+void Player::special()
+{
+	if (world->ThePlayer->location == world->TheKiller->location)
+	{
+		if (world->TheKiller->life > 0)
+		{
+			if (world->cooldown <= 0)
+			{
+				world->TheKiller->life -= world->ThePlayer->damage * 2;
+				printf("\nYou SPECIALLY attacked the killer and now he is at %i of life\n", world->TheKiller->life);
+				world->cooldown = 3;
+			}
+			else
+			{
+				printf("\n cant use it now!\n");
+			}
+			
+		}
+	}
+}
 void Player::attack()
 {
 	if (world->ThePlayer->location == world->TheKiller->location)

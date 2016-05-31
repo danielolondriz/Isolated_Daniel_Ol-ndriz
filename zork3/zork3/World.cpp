@@ -109,8 +109,7 @@ void World::CreateWorld()
 	//sellerNPC
 	entities.Push_back(new SellerNPC("Seller", "This is a vendor", (Room*)entities[10], 100, 20, CREATURE));
 	//Killer
-	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[0
-	], 100,30, CREATURE));
+	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[0], 100,30, CREATURE));
 
 	talker = (talkingNPC*)entities[39];
 	ThePlayer = (Player*)entities[40];
@@ -195,6 +194,7 @@ void World::movement()
 			if (ThePlayer->attacking == true)
 			{
 				ThePlayer->attack();
+				cooldown--;
 				//ThePlayer->attacking = false;
 				//
 				//return;
@@ -375,6 +375,10 @@ void World::movement()
 							{
 								ThePlayer->attack();
 							}
+							if (tokens[0] == "special" && tokens[1] == "hit")
+							{
+								ThePlayer->special();
+							}
 							if (tokens[0] == "use" && tokens[1] == "ticket")
 							{
 								ThePlayer->use(tokens);
@@ -404,7 +408,7 @@ void World::movement()
 							}
 						}
 
-
+						
 					}
 
 				}

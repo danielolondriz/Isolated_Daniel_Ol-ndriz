@@ -27,6 +27,7 @@ public:
 	talkingNPC *talker = nullptr;
 	SellerNPC *TheSeller = nullptr;
 	Killer *TheKiller = nullptr;
+	int cooldown = 0;
 public: 
 	World();
 	void CreateWorld();
