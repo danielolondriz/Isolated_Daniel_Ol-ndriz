@@ -178,7 +178,11 @@ void World::movement()
 			//system("cls");
 			printf("You are  at: %s\n", world->ThePlayer->location->name);
 			printItems();
-			printf("Your command is: %s\n", command);
+			if (command != NULL)
+			{
+				printf("Your command is: %s\n", command);
+			}
+			
 			printf("You have %i dollars\n", world->ThePlayer->money);
 			initialtime = currenttime;
 			for (int i = 0; i < entities.size(); i++)
