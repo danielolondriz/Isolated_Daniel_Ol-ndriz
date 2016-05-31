@@ -1,9 +1,9 @@
 # Zork1_Daniel_Olondriz
 ZORK 3 NOTES
-
+-Wait 5 seconds, and the game will begin :)
 5 items can be found in this game: the flashlight in the shop, the bag in the Haunted House, the crowbar in the ferris wheel, and the knife & the ticket in the store at the South Station.
 
-
+EXTRA NOTE: if you don't type anything at the begining, it will show random numbers at "your command" line. After you type the first command they will disapear. Have fun!
 SPECIAL FEATURES 
 
 if you buy a ticket from the store at the South Train Station, and type use ticket, you can travel to station from station; 
