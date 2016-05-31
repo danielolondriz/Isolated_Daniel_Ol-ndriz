@@ -109,7 +109,7 @@ void World::CreateWorld()
 	//sellerNPC
 	entities.Push_back(new SellerNPC("Seller", "This is a vendor", (Room*)entities[10], 100, 20, CREATURE));
 	//Killer
-	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[0], 100,30, CREATURE));
+	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[9], 100,30, CREATURE));
 
 	talker = (talkingNPC*)entities[39];
 	ThePlayer = (Player*)entities[40];
@@ -138,7 +138,7 @@ void World::printShop()
 		Dnode<Entity*>* temp1 = world->TheSeller->SList.first;
 		for (uint i = 0; i < TheSeller->SList.size(); i++)
 		{
-			printf("\n%s for %i", temp1->data->name.c_str(), ((Item*)temp1->data)->price);//((Item*)temp1->data)->price);
+			printf("\n%s for %i\n", temp1->data->name.c_str(), ((Item*)temp1->data)->price);//((Item*)temp1->data)->price);
 			//printf("%i\n", ((Item*)temp1->data)->price);
 			temp1 = temp1->next;
 		}
@@ -169,6 +169,7 @@ void World::movement()
 			}
 			if (world->TheKiller->life <= 0)
 			{
+				
 				printf("\n You've killed the Killer!!!!!\n\n");
 				printf("\n\nYOU WON!\n\n");
 				system("pause");
@@ -176,6 +177,7 @@ void World::movement()
 			}
 			//printf("Hy.\n
 			//system("cls");
+			printf("_______________________________________________________________\n");
 			printf("You are  at: %s\n", world->ThePlayer->location->name);
 			printItems();
 			if (command != NULL)
@@ -184,6 +186,7 @@ void World::movement()
 			}
 			
 			printf("You have %i dollars\n", world->ThePlayer->money);
+			printf("_______________________________________________________________\n");
 			initialtime = currenttime;
 			for (int i = 0; i < entities.size(); i++)
 			{
@@ -236,7 +239,32 @@ void World::movement()
 						}
 						if (TheKiller->Killstate != FIGHT)
 						{
-						if (tokens[0] == "go" && tokens.size() >= 1)
+							
+							if (tokens.size() == 1)
+							{
+								if (tokens[0] == "n")
+								{
+									ThePlayer->Go(north);
+
+
+								}
+								if (tokens[0] == "w")
+								{
+									ThePlayer->Go(west);
+
+								}
+								if (tokens[0] == "s")
+								{
+									ThePlayer->Go(south);
+
+								}
+								if (tokens[0] == "e")
+								{
+									ThePlayer->Go(east);
+
+								}
+							}
+						 if (tokens[0] == "go" && tokens.size() >= 1)
 						{
 
 							if (tokens.size() >= 2)
@@ -244,6 +272,7 @@ void World::movement()
 								if (tokens[1] == "north")
 								{
 									ThePlayer->Go(north);
+									
 
 								}
 								if (tokens[1] == "west")

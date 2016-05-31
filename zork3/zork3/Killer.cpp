@@ -14,6 +14,7 @@ void Killer::Update()
 
 		if (world->ThePlayer->location == world->TheKiller->location)
 		{
+			printf("\nTHE KILLER FOUND YOU\n");
 			Killstate = FIGHT;
 			
 		}
