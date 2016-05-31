@@ -109,7 +109,8 @@ void World::CreateWorld()
 	//sellerNPC
 	entities.Push_back(new SellerNPC("Seller", "This is a vendor", (Room*)entities[10], 100, 20, CREATURE));
 	//Killer
-	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[9], 100,30, CREATURE));
+	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[0
+	], 100,30, CREATURE));
 
 	talker = (talkingNPC*)entities[39];
 	ThePlayer = (Player*)entities[40];
@@ -191,27 +192,32 @@ void World::movement()
 			}
 			
 
-			
-		}
-
-		//kbhit 
-		
-		if (_kbhit())
-		{
-			for (int i = 0; i < entities.size(); i++)
+			if (ThePlayer->attacking == true)
 			{
-			//entities[i]->Update();
+				ThePlayer->attack();
+				//ThePlayer->attacking = false;
+				//
+				//return;
 			}
 			
-				if (charcommandnum < (COMMANDBUFFER - 2)){
+		}
+		
+		//kbhit 
+		else
+		{
+
+			if (_kbhit())
+			{
+				
+				 if (charcommandnum < (COMMANDBUFFER - 2)){
 					command[charcommandnum] = _getch();
 					command[charcommandnum + 1] = '\0';
 					//printf("String: %s\n", command);//prints command
-					
+
 					charcommandnum++;
 					if (command[charcommandnum - 1] == '\r'){//prints full comand
 						printf("Your command is: %s\n", command);
-						
+
 						command[charcommandnum - 1] = '\0';
 						charcommandnum = 0;
 						option = command;
@@ -219,7 +225,7 @@ void World::movement()
 						Vector <MyString> tokens = option.tokenize(" ", command);
 						words = tokens;
 						temporal = command;
-					//	command = "\0";
+						//	command = "\0";
 						if (option == "q" || option == "quit")
 						{
 							break;
@@ -228,29 +234,32 @@ void World::movement()
 						{
 							continue;
 						}
-						else if (tokens[0] == "go" && tokens.size() >= 1)
+						if (TheKiller->Killstate != FIGHT)
 						{
+						if (tokens[0] == "go" && tokens.size() >= 1)
+						{
+
 							if (tokens.size() >= 2)
 							{
 								if (tokens[1] == "north")
 								{
 									ThePlayer->Go(north);
-									
+
 								}
 								if (tokens[1] == "west")
 								{
 									ThePlayer->Go(west);
-									
+
 								}
 								if (tokens[1] == "south")
 								{
 									ThePlayer->Go(south);
-									
+
 								}
 								if (tokens[1] == "east")
 								{
 									ThePlayer->Go(east);
-									
+
 								}
 								continue;
 							}
@@ -258,9 +267,12 @@ void World::movement()
 							{
 								printf("\nWhere\n");
 							}
-							
+
 						}
-						else if (tokens[0] == "look" && tokens.size() >= 1)
+						}
+						if (TheKiller->Killstate != FIGHT)
+						{
+						 if (tokens[0] == "look" && tokens.size() >= 1)
 						{
 							if (tokens.size() >= 2)
 							{
@@ -291,14 +303,18 @@ void World::movement()
 								printf("\nYou are in : %s\n", ThePlayer->location->description);
 							}
 
+
 						}
-						else if (tokens[0] == "open" && tokens.size() >= 1)
+						}
+						if (TheKiller->Killstate != FIGHT)
 						{
-									ThePlayer->Open();
+						 if (tokens[0] == "open" && tokens.size() >= 1)
+						{
+							ThePlayer->Open();
 						}
 						else if (tokens[0] == "close" && tokens.size() >= 1)
-						{	
-									ThePlayer->Close();	
+						{
+							ThePlayer->Close();
 						}
 						else if (tokens[0] == "pick" && tokens.size() >= 1)
 						{
@@ -348,50 +364,55 @@ void World::movement()
 								printf("\nWhat do you want to unequip\n");
 							}
 						}
+						}
 						if (tokens.size() == 2)
 						{
-							 if (tokens[0] == "buy" && tokens[1] == "seller")
+							if (tokens[0] == "buy" && tokens[1] == "seller")
 							{
-								 printShop();
+								printShop();
 							}
-							 if (tokens[0] == "attack" && tokens[1] == "killer")
-							 {
-								 ThePlayer->attack(tokens);
-							 }
-							 if (tokens[0] == "use" && tokens[1] == "ticket")
-							 {
-								 ThePlayer->use(tokens);
-							 }
+							if (tokens[0] == "attack" && tokens[1] == "killer")
+							{
+								ThePlayer->attack();
+							}
+							if (tokens[0] == "use" && tokens[1] == "ticket")
+							{
+								ThePlayer->use(tokens);
+							}
 						}
-						if (tokens.size() >= 4)
+						if (TheKiller->Killstate != FIGHT)
 						{
-						 if (tokens[0] == "put" && tokens.size() >= 1 && tokens[3] == "bag")
-						{
+							if (tokens.size() >= 4)
+							{
+								if (tokens[0] == "put" && tokens.size() >= 1 && tokens[3] == "bag")
+								{
 
-							ThePlayer->Put(tokens);
-						}
-						else if (tokens[0] == "get" && tokens.size() >= 1 && tokens[3] == "bag")
-						{
-							ThePlayer->Get(tokens);
-						}
-						else if (tokens[0] == "buy" && tokens.size() >= 1 && tokens[3] == "seller")
-						{
-							ThePlayer->buy(tokens);
-						}
-						else if (tokens[0] == "sell" && tokens.size() >= 1 && tokens[3] == "seller")
-						{
-							ThePlayer->sell(tokens);
-						}
+									ThePlayer->Put(tokens);
+								}
+								else if (tokens[0] == "get" && tokens.size() >= 1 && tokens[3] == "bag")
+								{
+									ThePlayer->Get(tokens);
+								}
+								else if (tokens[0] == "buy" && tokens.size() >= 1 && tokens[3] == "seller")
+								{
+									ThePlayer->buy(tokens);
+								}
+								else if (tokens[0] == "sell" && tokens.size() >= 1 && tokens[3] == "seller")
+								{
+									ThePlayer->sell(tokens);
+								}
+							}
 						}
 
-						
+
 					}
 
 				}
 				else{
 					command[COMMANDBUFFER - 1] = '\0';
 				}
-			
+
+			}
 		}
 	}
 	

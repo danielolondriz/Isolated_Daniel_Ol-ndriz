@@ -175,12 +175,13 @@ void Player::use(Vector<MyString>& item)
 		}
 	}
 }
-void Player::attack(Vector<MyString>& item)
+void Player::attack()
 {
 	if (world->ThePlayer->location == world->TheKiller->location)
 	{
 		if (world->TheKiller->life > 0)
 		{
+			attacking = true;
 			world->TheKiller->life -= world->ThePlayer->damage;
 			printf("\nYou attacked the killer and now he is at %i of life\n", world->TheKiller->life);
 		}

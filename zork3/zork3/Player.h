@@ -7,6 +7,7 @@ public:
 	uint maxeq;
 	uint elementsinv;
 	uint elementseq;
+	bool attacking = false;
 public:
 	Player(const char*, const char*, Room*, uint, uint,uint, ObjectType);
 	~Player();
@@ -23,7 +24,7 @@ public:
 	void Get(Vector<MyString>&);
 	void buy(Vector<MyString>&);
 	void sell(Vector<MyString>&);
-	void attack(Vector<MyString>&);
+	void attack();
 	void use(Vector<MyString>&);
 
 };
