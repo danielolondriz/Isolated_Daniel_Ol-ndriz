@@ -10,9 +10,11 @@
 #include "Item.h"
 #include "talkingNPC.h"
 #include "SellerNPC.h"
+#include "killer.h"
 
 #include "Vector.h"
 #include "Dlist.h"
+
 
 
 class World
@@ -29,6 +31,7 @@ public:
 	void CreateWorld();
 	void movement();
 	void printItems();
+	void printShop();
 	
 };
 

@@ -39,7 +39,7 @@ void World::CreateWorld()
 	//room 9
 	entities.Push_back(new Room("Dock", "A Boat stands in front of you but, it's cabin is locked with a keychain.\n", false, true,ROOM));
 	//room 10
-	entities.Push_back(new Room("South Train Station", "This is the south train station. There is a train, but it doesn't seem to work.\n", false, true,ROOM));
+	entities.Push_back(new Room("South Train Station, you can se a seller", "This is the south train station. There is a train, but it doesn't seem to work.\n", false, true,ROOM));
 	//room 11
 	entities.Push_back(new Room("North Train Station", "This is the magestic North train station. Yet no train seems to be coming...\n", false, true,ROOM));
 
@@ -124,6 +124,20 @@ void World::printItems()
 				printf("In this room there is a %s\n\n", ((Item*)entities[i])->name);
 			}
 			
+		}
+	}
+}
+void World::printShop()
+{
+	if (ThePlayer->location == TheSeller->location)
+	{
+		printf("Hello, I'm the seller of this park!\n You better don't drop anything on the floor, as I will be cleaning the station!\nWhat do you want to buy\n");
+		Dnode<Entity*>* temp1 = world->TheSeller->SList.first;
+		for (uint i = 0; i < TheSeller->SList.size(); i++)
+		{
+			printf("\n%s for %i", temp1->data->name.c_str(), ((Item*)temp1->data)->price);//((Item*)temp1->data)->price);
+			//printf("%i\n", ((Item*)temp1->data)->price);
+			temp1 = temp1->next;
 		}
 	}
 }
@@ -312,7 +326,13 @@ void World::movement()
 								printf("\nWhat do you want to unequip\n");
 							}
 						}
-						
+						if (tokens.size() == 2)
+						{
+							 if (tokens[0] == "buy" && tokens[1] == "seller")
+							{
+								 printShop();
+							}
+						}
 						if (tokens.size() >= 4)
 						{
 						 if (tokens[0] == "put" && tokens.size() >= 1 && tokens[3] == "bag")

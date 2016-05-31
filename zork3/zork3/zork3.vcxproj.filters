@@ -60,6 +60,9 @@
     <ClCompile Include="Dlist.cpp">
       <Filter>Archivos de código fuente\Vectors &amp; Strings</Filter>
     </ClCompile>
+    <ClCompile Include="Killer.cpp">
+      <Filter>Archivos de código fuente\entities\Creatures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="Dlist.h">
       <Filter>Archivos de código fuente\Vectors &amp; Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="killer.h">
+      <Filter>Archivos de código fuente\entities\Creatures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

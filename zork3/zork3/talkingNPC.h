@@ -1,5 +1,5 @@
 #include "Dlist.h"
-enum State{ MOVING, TALKING, DEAD, DISAPPEAR };
+enum State{ MOVING, TALKING  };
 class talkingNPC : public Creature
 {
 public:

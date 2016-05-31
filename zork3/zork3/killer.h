@@ -1,0 +1,1 @@
+enum KState{ MOVING, TALKING, DEAD, DISAPPEAR };

@@ -5,7 +5,7 @@
 class Item : public Entity
 {
 public:
-	uint price;
+	uint price = 0;
 public:
 	Room* location;
 	bool inventory;
