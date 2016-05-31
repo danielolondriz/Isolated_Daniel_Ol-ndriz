@@ -155,6 +155,26 @@ void Player::buy(Vector<MyString>& item)
 		}
 	}
 }
+void Player::use(Vector<MyString>& item)
+{
+	if (((Item*)world->entities[36])->inventory == true)
+	{
+		if (world->ThePlayer->location == ((Room*)world->entities[10]) || world->ThePlayer->location == ((Room*)world->entities[11]))
+		{
+			printf("\nYou used the ticket and traveled by train!\n ");
+			if (world->ThePlayer->location == ((Room*)world->entities[10]))
+			{
+				world->ThePlayer->location = ((Room*)world->entities[11]);
+				return;
+			}
+			else if (world->ThePlayer->location == ((Room*)world->entities[11]))
+			{
+				world->ThePlayer->location = ((Room*)world->entities[10]);
+				return;
+			}
+		}
+	}
+}
 void Player::attack(Vector<MyString>& item)
 {
 	if (world->ThePlayer->location == world->TheKiller->location)
@@ -162,7 +182,7 @@ void Player::attack(Vector<MyString>& item)
 		if (world->TheKiller->life > 0)
 		{
 			world->TheKiller->life -= world->ThePlayer->damage;
-			printf("\nYou attacked the killer and now he is at %i of life", world->TheKiller->life);
+			printf("\nYou attacked the killer and now he is at %i of life\n", world->TheKiller->life);
 		}
 		else
 		{

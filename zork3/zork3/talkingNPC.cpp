@@ -35,7 +35,7 @@ void talkingNPC::Move()
 {
 	int i = (rand() % 2);
 	world->talker->location = ((Room*)world->entities[i]);
-	//printf("\nYou hear a firendly music somwhere at  %s\n", ((Room*)world->entities[i])->name);
+	printf("\nYou hear a firendly music somwhere at  %s\n", ((Room*)world->entities[i])->name);
 	if (world->ThePlayer->location == world->talker->location)
 	{
 		Tstate = TALKING;

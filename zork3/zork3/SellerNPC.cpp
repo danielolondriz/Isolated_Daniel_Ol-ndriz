@@ -12,7 +12,7 @@ void SellerNPC::Update()
 		if (((Item*)world->entities[i])->location == world->TheSeller->location && ((Item*)world->entities[i])->inventory == false)
 		{
 			SList.push_back(((Item*)world->entities[i]));
-			printf("\n%s\n", ((Item*)world->entities[i])->name);
+		//	printf("\n%s\n", ((Item*)world->entities[i])->name);
 			((Item*)world->entities[i])->location = NULL;
 		}
 	}

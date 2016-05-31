@@ -24,4 +24,6 @@ public:
 	void buy(Vector<MyString>&);
 	void sell(Vector<MyString>&);
 	void attack(Vector<MyString>&);
+	void use(Vector<MyString>&);
+
 };

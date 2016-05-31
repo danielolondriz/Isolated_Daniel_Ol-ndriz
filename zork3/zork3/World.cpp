@@ -105,11 +105,11 @@ void World::CreateWorld()
 	//NPC
 	entities.Push_back(new talkingNPC("Walking robot", "Walking security Robot ", (Room*)entities[1], 100,0, CREATURE));
 	//player
-	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100,20,50, CREATURE));
+	entities.Push_back(new Player("Player", "Player", (Room*)entities[0], 100,20,0, CREATURE));
 	//sellerNPC
 	entities.Push_back(new SellerNPC("Seller", "This is a vendor", (Room*)entities[10], 100, 20, CREATURE));
 	//Killer
-	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[0], 100,30, CREATURE));
+	entities.Push_back(new Killer("Killer", "This is the Killer", (Room*)entities[9], 100,30, CREATURE));
 
 	talker = (talkingNPC*)entities[39];
 	ThePlayer = (Player*)entities[40];
@@ -169,6 +169,7 @@ void World::movement()
 			}
 			if (world->TheKiller->life <= 0)
 			{
+				printf("\n You've killed the Killer!!!!!\n\n");
 				printf("\n\nYOU WON!\n\n");
 				system("pause");
 				return;
@@ -352,6 +353,10 @@ void World::movement()
 							 if (tokens[0] == "attack" && tokens[1] == "killer")
 							 {
 								 ThePlayer->attack(tokens);
+							 }
+							 if (tokens[0] == "use" && tokens[1] == "ticket")
+							 {
+								 ThePlayer->use(tokens);
 							 }
 						}
 						if (tokens.size() >= 4)
